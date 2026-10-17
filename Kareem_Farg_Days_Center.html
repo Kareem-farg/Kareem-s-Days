@@ -1,0 +1,1448 @@
+<!doctype html>
+<html lang="ar" dir="rtl" class="scroll-smooth dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kareem's Days</title>
+    <link rel="icon" type="image" href="13 (36).jpg" />
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts: Cairo (Arabic) & Plus Jakarta Sans (Numbers / Badges) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- FontAwesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <script>
+      
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                bg: "#080C14",
+                card: "#0F1626",
+                cardHover: "#152035",
+                cardInner: "#0B111E",
+                border: "#1E293B",
+                borderLight: "#334155",
+                cyan: "#06B6D4",
+                cyanGlow: "#0891B2",
+                emerald: "#10B981",
+                amber: "#F59E0B",
+                rose: "#F43F5E",
+                text: "#F8FAFC",
+                muted: "#94A3B8",
+              },
+            },
+            fontFamily: {
+              arabic: ["Cairo", "sans-serif"],
+              tech: ['"Plus Jakarta Sans"', "Cairo", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      * {
+        font-family: "Cairo", "Plus Jakarta Sans", sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      .tech-font {
+        font-family: "Plus Jakarta Sans", sans-serif;
+      }
+
+      /* Compositor-only motion transitions complying with fixing-motion-performance */
+      .interactive-card {
+        transition:
+          transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+          border-color 0.2s ease;
+        will-change: transform;
+      }
+      .interactive-card:hover {
+        transform: translateY(-2px);
+        border-color: #06b6d4;
+      }
+
+      /* Custom Checkbox */
+      .custom-checkbox {
+        appearance: none;
+        -webkit-appearance: none;
+        width: 18px;
+        height: 18px;
+        border: 1.5px solid #334155;
+        border-radius: 5px;
+        background: #080c14;
+        cursor: pointer;
+        display: inline-grid;
+        place-content: center;
+        transition:
+          background-color 0.15s ease,
+          border-color 0.15s ease,
+          transform 0.15s ease;
+        will-change: transform;
+        flex-shrink: 0;
+      }
+      .custom-checkbox:hover {
+        border-color: #06b6d4;
+        transform: scale(1.08);
+      }
+      .custom-checkbox:checked {
+        background: #10b981;
+        border-color: #10b981;
+      }
+      .custom-checkbox:checked::before {
+        content: "\f00c";
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        font-size: 10px;
+        color: #080c14;
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #080c14;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #1e293b;
+        border-radius: 9999px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #06b6d4;
+      }
+
+      /* SVG Circular progress */
+      .progress-ring__circle {
+        transition: stroke-dashoffset 0.4s ease;
+        transform: rotate(-90deg);
+        transform-origin: 50% 50%;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-brand-bg text-brand-text min-h-screen flex flex-col selection:bg-brand-cyan selection:text-brand-bg pb-8"
+  >
+    <!-- ================= TOP OPERATIONS BAR ================= -->
+    <header
+      class="sticky top-0 z-50 bg-[#0F1626]/90 border-b border-brand-border backdrop-blur-md"
+    >
+      <div
+        class="max-w-7xl mx-auto px-3 sm:px-6 h-16 flex items-center justify-between gap-3"
+      >
+        <!-- Brand & Date Badge -->
+        <div class="flex items-center gap-3">
+          <div
+            class="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-cyan to-brand-emerald flex items-center justify-center font-black text-brand-bg text-base shadow-lg shadow-cyan-500/20"
+          >
+            KF
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h1 class="font-extrabold text-sm sm:text-base text-white">
+                غرفة عمليات كريم فرج
+              </h1>
+              <span
+                class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] bg-emerald-500/10 text-emerald-400 font-bold border border-emerald-500/20"
+              >
+                <span
+                  class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse ml-1.5"
+                ></span>
+                مباشر
+              </span>
+            </div>
+            <p
+              class="text-[11px] text-brand-muted tech-font font-semibold"
+              id="topDateDisplay"
+            >
+              --
+            </p>
+          </div>
+        </div>
+
+        <!-- Live Clock & WhatsApp Quick Action Button -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          <div
+            class="hidden sm:flex flex-col text-left px-2.5 py-1 rounded-lg border border-brand-border bg-brand-cardInner"
+          >
+            <div
+              id="liveClock"
+              class="tech-font text-xs font-bold text-brand-cyan"
+            >
+              --:--:--
+            </div>
+            <div class="text-[9px] text-brand-muted">التوقيت المحلي</div>
+          </div>
+
+          <!-- WhatsApp Quick Send -->
+          <button
+            onclick="sendTodayScheduleToWhatsApp()"
+            class="px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center gap-1.5 transition-colors shadow-lg shadow-emerald-600/20"
+            title="إرسال جدول اليوم لتليفوني"
+          >
+            <i class="fa-brands fa-whatsapp text-sm"></i>
+            <span class="hidden sm:inline">إرسال للواتس</span>
+          </button>
+
+          <!-- Browser Notification Toggle -->
+          <button
+            id="notifyBtn"
+            onclick="toggleWebNotifications()"
+            class="px-2.5 py-1.5 rounded-xl bg-brand-cardInner hover:bg-brand-border text-brand-muted hover:text-white border border-brand-border text-xs flex items-center gap-1.5 transition-colors"
+            title="تفعيل إشعارات المتصفح"
+          >
+            <i class="fa-regular fa-bell text-brand-cyan" id="notifyIcon"></i>
+            <span class="hidden md:inline" id="notifyText"
+              >تفعيل التنبيهات</span
+            >
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ================= MAIN DASHBOARD CONTAINER (COMPACT 2/3 COLUMN LAYOUT) ================= -->
+    <main class="max-w-7xl mx-auto px-3 sm:px-6 w-full pt-4 space-y-4">
+      <!-- TOP ROW: Control Toolbar & Reset Status Banner -->
+      <div
+        class="p-3.5 rounded-2xl bg-brand-card border border-brand-border flex flex-wrap items-center justify-between gap-3"
+      >
+        <!-- Day Switcher & Auto-reset Indicator -->
+        <div class="flex items-center gap-3 flex-wrap">
+          <div class="flex items-center gap-2">
+            <label
+              for="daySelect"
+              class="text-xs text-brand-muted font-bold flex items-center gap-1"
+            >
+              <i class="fa-regular fa-calendar text-brand-cyan"></i>
+              <span>تاريخ المعاينة:</span>
+            </label>
+            <select
+              id="daySelect"
+              class="bg-brand-cardInner text-brand-cyan font-bold text-xs sm:text-sm px-3 py-1.5 rounded-xl border border-brand-borderLight focus:outline-none focus:border-brand-cyan transition-colors"
+            >
+              <!-- Loaded dynamically with 20 days -->
+            </select>
+          </div>
+
+          <div
+            class="text-[11px] text-brand-muted bg-brand-cardInner px-3 py-1 rounded-xl border border-brand-border flex items-center gap-1.5"
+          >
+            <i class="fa-solid fa-arrows-rotate text-emerald-400"></i>
+            <span>تصفير تلقائي كل صباح: <b class="text-white">مفعل</b></span>
+          </div>
+        </div>
+
+        <!-- Action Buttons (Manual Reset & Clear Day) -->
+        <div class="flex items-center gap-2">
+          <button
+            onclick="manualResetDailyHabits()"
+            class="px-3 py-1.5 rounded-xl bg-brand-cardInner hover:bg-rose-500/20 text-brand-muted hover:text-rose-400 border border-brand-border hover:border-rose-500/30 text-xs font-bold transition-all flex items-center gap-1.5"
+            title="تصفير علامات الصح لليوم الحالي للبدء من جديد"
+          >
+            <i class="fa-solid fa-arrow-rotate-left"></i>
+            <span>تصفير مهام اليوم</span>
+          </button>
+          <button
+            onclick="checkAllHabits()"
+            class="px-3 py-1.5 rounded-xl bg-brand-cardInner hover:bg-emerald-500/20 text-brand-muted hover:text-emerald-400 border border-brand-border hover:border-emerald-500/30 text-xs font-bold transition-all flex items-center gap-1.5"
+            title="تحديد جميع المهام كمكتملة"
+          >
+            <i class="fa-solid fa-check-double"></i>
+            <span>تحديد الكل</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- METRICS STRIP: 4 Compact KPI Cards (Compositor-Friendly, Non-Stretching) -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <!-- Metric 1: Tasks Done -->
+        <div
+          class="p-3.5 rounded-2xl bg-brand-card border border-brand-border flex items-center justify-between"
+        >
+          <div>
+            <span class="text-[11px] text-brand-muted block font-medium"
+              >المهام المنجزة اليوم</span
+            >
+            <div class="flex items-baseline gap-1 mt-0.5">
+              <span
+                id="kpiTasksDone"
+                class="text-2xl font-black text-brand-emerald tech-font"
+                >6</span
+              >
+              <span class="text-xs text-brand-muted tech-font">/ 39</span>
+            </div>
+          </div>
+          <div
+            class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-brand-emerald flex items-center justify-center text-base"
+          >
+            <i class="fa-solid fa-list-check"></i>
+          </div>
+        </div>
+
+        <!-- Metric 2: Completion Rate with Gauge -->
+        <div
+          class="p-3.5 rounded-2xl bg-brand-card border border-brand-border flex items-center justify-between"
+        >
+          <div>
+            <span class="text-[11px] text-brand-muted block font-medium"
+              >نسبة الإنجاز</span
+            >
+            <span
+              id="kpiPercentage"
+              class="text-2xl font-black text-brand-cyan tech-font mt-0.5 block"
+              >15.4%</span
+            >
+          </div>
+          <div class="relative w-11 h-11 flex items-center justify-center">
+            <svg class="w-11 h-11" viewBox="0 0 36 36">
+              <path
+                class="text-brand-border"
+                stroke-width="3.5"
+                stroke="currentColor"
+                fill="none"
+                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+              />
+              <path
+                id="kpiCircleGauge"
+                class="text-brand-cyan progress-ring__circle"
+                stroke-dasharray="100, 100"
+                stroke-dashoffset="85"
+                stroke-width="3.5"
+                stroke-linecap="round"
+                stroke="currentColor"
+                fill="none"
+                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+              />
+            </svg>
+          </div>
+        </div>
+
+        <!-- Metric 3: Water Tracker -->
+        <div
+          class="p-3.5 rounded-2xl bg-brand-card border border-brand-border flex items-center justify-between"
+        >
+          <div>
+            <span class="text-[11px] text-brand-muted block font-medium"
+              >معدل شرب الماء</span
+            >
+            <div class="flex items-center gap-1.5 mt-1.5">
+              <button
+                onclick="setWater(1)"
+                class="water-pill px-2 py-0.5 rounded-md text-[10px] font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 tech-font"
+              >
+                1L
+              </button>
+              <button
+                onclick="setWater(2)"
+                class="water-pill px-2 py-0.5 rounded-md text-[10px] font-bold bg-brand-cardInner text-brand-muted border border-brand-border tech-font"
+              >
+                2L
+              </button>
+              <button
+                onclick="setWater(3)"
+                class="water-pill px-2 py-0.5 rounded-md text-[10px] font-bold bg-brand-cardInner text-brand-muted border border-brand-border tech-font"
+              >
+                3L
+              </button>
+            </div>
+          </div>
+          <div
+            class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center text-base"
+          >
+            <i class="fa-solid fa-droplet"></i>
+          </div>
+        </div>
+
+        <!-- Metric 4: Next 1-Hour WhatsApp Alert -->
+        <div
+          class="p-3.5 rounded-2xl bg-brand-card border border-brand-border flex items-center justify-between"
+        >
+          <div class="overflow-hidden">
+            <span class="text-[11px] text-brand-muted block font-medium"
+              >تذكير الواتس (قبلها بساعة)</span
+            >
+            <span
+              id="nextUpcomingReminderText"
+              class="text-xs font-bold text-white truncate block mt-0.5"
+              >سكشن سيليكتيد</span
+            >
+            <button
+              onclick="triggerDirectWhatsAppReminder()"
+              class="text-[10px] text-emerald-400 hover:text-emerald-300 font-bold flex items-center gap-1 mt-1"
+            >
+              <i class="fa-brands fa-whatsapp"></i>
+              <span>إرسال تنبيه بالموعد الآن</span>
+            </button>
+          </div>
+          <div
+            class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center text-base flex-shrink-0"
+          >
+            <i class="fa-solid fa-bell"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAIN OPERATIONAL WORKSPACE: 3 PARALLEL COMPACT COLUMNS -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
+        <!-- ================= LEFT COLUMN: TODAY'S SCHEDULE & PRIORITIES (4 COLS) ================= -->
+        <div class="lg:col-span-4 space-y-4">
+          <!-- Today's Schedule Card -->
+          <div class="p-4 rounded-3xl bg-brand-card border border-brand-border">
+            <div
+              class="flex items-center justify-between pb-3 mb-3 border-b border-brand-border"
+            >
+              <div class="flex items-center gap-2">
+                <div
+                  class="w-7 h-7 rounded-lg bg-cyan-500/10 text-brand-cyan flex items-center justify-center text-xs"
+                >
+                  <i class="fa-solid fa-calendar-day"></i>
+                </div>
+                <h3
+                  class="font-extrabold text-sm text-white"
+                  id="todayScheduleTitle"
+                >
+                  السبت (17 أكتوبر)
+                </h3>
+              </div>
+              <span
+                class="text-[10px] px-2 py-0.5 rounded-md bg-brand-cardInner text-brand-cyan border border-brand-border tech-font"
+                id="todayDayBadge"
+                >الكلية والتدريب</span
+              >
+            </div>
+
+            <!-- Schedule breakdown -->
+            <div class="space-y-2.5 text-xs" id="todayScheduleContainer">
+              <!-- Dynamically populated -->
+            </div>
+
+            <!-- Direct WhatsApp 1-Hour Alert Action -->
+            <div
+              class="mt-3.5 pt-3 border-t border-brand-border/70 flex items-center justify-between"
+            >
+              <span class="text-[11px] text-brand-muted"
+                >رقم التذكير:
+                <b class="tech-font text-white">01095622134</b></span
+              >
+              <button
+                onclick="triggerDirectWhatsAppReminder()"
+                class="px-2.5 py-1 rounded-lg bg-emerald-600/20 hover:bg-emerald-600 text-emerald-400 hover:text-white border border-emerald-500/30 text-[11px] font-bold transition-colors flex items-center gap-1"
+              >
+                <i class="fa-brands fa-whatsapp"></i>
+                <span>تذكير قبل ساعة</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Top 3 Priorities for Today (Interactive & Persisted) -->
+          <div class="p-4 rounded-3xl bg-brand-card border border-brand-border">
+            <div
+              class="flex items-center justify-between pb-2.5 mb-2.5 border-b border-brand-border"
+            >
+              <h3
+                class="font-bold text-xs text-white flex items-center gap-1.5"
+              >
+                <i class="fa-solid fa-bullseye text-amber-400"></i>
+                <span>أهم 3 أولويات لا تقبل التأجيل</span>
+              </h3>
+              <span class="text-[10px] text-brand-muted">حفظ فوري</span>
+            </div>
+
+            <div class="space-y-2" id="prioritiesList">
+              <!-- Priority 1 -->
+              <div
+                class="flex items-center gap-2 bg-brand-cardInner p-2 rounded-xl border border-brand-border"
+              >
+                <input
+                  type="checkbox"
+                  id="prioCheck1"
+                  onchange="savePriorities()"
+                  class="custom-checkbox"
+                />
+                <input
+                  type="text"
+                  id="prioText1"
+                  oninput="savePriorities()"
+                  placeholder="أولوية رقم 1..."
+                  class="w-full bg-transparent text-xs text-brand-text placeholder-brand-muted focus:outline-none font-medium"
+                />
+              </div>
+              <!-- Priority 2 -->
+              <div
+                class="flex items-center gap-2 bg-brand-cardInner p-2 rounded-xl border border-brand-border"
+              >
+                <input
+                  type="checkbox"
+                  id="prioCheck2"
+                  onchange="savePriorities()"
+                  class="custom-checkbox"
+                />
+                <input
+                  type="text"
+                  id="prioText2"
+                  oninput="savePriorities()"
+                  placeholder="أولوية رقم 2..."
+                  class="w-full bg-transparent text-xs text-brand-text placeholder-brand-muted focus:outline-none font-medium"
+                />
+              </div>
+              <!-- Priority 3 -->
+              <div
+                class="flex items-center gap-2 bg-brand-cardInner p-2 rounded-xl border border-brand-border"
+              >
+                <input
+                  type="checkbox"
+                  id="prioCheck3"
+                  onchange="savePriorities()"
+                  class="custom-checkbox"
+                />
+                <input
+                  type="text"
+                  id="prioText3"
+                  oninput="savePriorities()"
+                  placeholder="أولوية رقم 3..."
+                  class="w-full bg-transparent text-xs text-brand-text placeholder-brand-muted focus:outline-none font-medium"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Master Weekly Overview (Mini Tabs / Quick peek) -->
+          <div class="p-4 rounded-3xl bg-brand-card border border-brand-border">
+            <div class="flex items-center justify-between mb-3">
+              <h4
+                class="font-bold text-xs text-white flex items-center gap-1.5"
+              >
+                <i class="fa-solid fa-calendar-week text-brand-cyan"></i>
+                <span>الجدول الأسبوعي الكامل</span>
+              </h4>
+              <span class="text-[10px] text-brand-muted">7 أيام</span>
+            </div>
+
+            <div
+              class="space-y-1.5 max-h-56 overflow-y-auto pr-1"
+              id="miniWeeklySchedule"
+            >
+              <!-- Loaded via JS -->
+            </div>
+          </div>
+
+          <!-- Evening Reflection Notes -->
+          <div class="p-4 rounded-3xl bg-brand-card border border-brand-border">
+            <h4
+              class="font-bold text-xs text-white flex items-center gap-1.5 mb-2"
+            >
+              <i class="fa-solid fa-moon text-indigo-400"></i>
+              <span>تفريغ ذهني وتقييم اليوم</span>
+            </h4>
+            <textarea
+              id="eveningNotes"
+              oninput="saveReflection()"
+              placeholder="اكتب ملاحظاتك أو تقييمك لليوم قبل النوم..."
+              class="w-full h-20 bg-brand-cardInner border border-brand-border rounded-xl p-2.5 text-xs text-brand-text placeholder-brand-muted focus:outline-none focus:border-brand-cyan transition-colors resize-none"
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- ================= RIGHT COLUMN: 39 HABITS & ROUTINE CHECKLIST (8 COLS) ================= -->
+        <div class="lg:col-span-8 space-y-4">
+          <!-- Category Filter & Search Bar -->
+          <div class="p-4 rounded-3xl bg-brand-card border border-brand-border">
+            <div
+              class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pb-3 mb-3 border-b border-brand-border"
+            >
+              <div class="flex items-center gap-2">
+                <h3 class="font-extrabold text-sm sm:text-base text-white">
+                  الروتين والعادات اليومية (39)
+                </h3>
+                <span
+                  id="filterCountBadge"
+                  class="text-[11px] px-2 py-0.5 rounded-full bg-cyan-500/10 text-brand-cyan tech-font font-bold"
+                  >39 مهمة</span
+                >
+              </div>
+
+              <!-- Quick Filter Pills -->
+              <div
+                class="flex items-center gap-1 overflow-x-auto text-xs font-bold bg-brand-cardInner p-1 rounded-xl border border-brand-border"
+              >
+                <button
+                  onclick="filterCategory('all')"
+                  class="cat-pill px-2.5 py-1 rounded-lg bg-brand-cyan text-brand-bg transition-colors"
+                  data-cat="all"
+                >
+                  الكل
+                </button>
+                <button
+                  onclick="filterCategory('العبادات والسنن')"
+                  class="cat-pill px-2.5 py-1 rounded-lg text-brand-muted hover:text-white transition-colors"
+                  data-cat="العبادات والسنن"
+                >
+                  العبادات (14)
+                </button>
+                <button
+                  onclick="filterCategory('القرآن والأذكار')"
+                  class="cat-pill px-2.5 py-1 rounded-lg text-brand-muted hover:text-white transition-colors"
+                  data-cat="القرآن والأذكار"
+                >
+                  القرآن (12)
+                </button>
+                <button
+                  onclick="filterCategory('الصحة والعناية الشخصية')"
+                  class="cat-pill px-2.5 py-1 rounded-lg text-brand-muted hover:text-white transition-colors"
+                  data-cat="الصحة والعناية الشخصية"
+                >
+                  العناية (8)
+                </button>
+                <button
+                  onclick="filterCategory('اللياقة والتطوير الشخصي')"
+                  class="cat-pill px-2.5 py-1 rounded-lg text-brand-muted hover:text-white transition-colors"
+                  data-cat="اللياقة والتطوير الشخصي"
+                >
+                  التطوير (5)
+                </button>
+              </div>
+            </div>
+
+            <!-- COMPACT 2-COLUMN GRID (Prevents Long Vertical Scroll) -->
+            <div
+              id="habitsGrid"
+              class="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-[720px] overflow-y-auto pr-1"
+            >
+              <!-- Injected via JavaScript -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- ================= NOTIFICATION MODAL / TOAST ================= -->
+    <div
+      id="notificationToast"
+      class="fixed bottom-5 left-5 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none bg-brand-card border border-brand-cyan rounded-2xl p-4 shadow-2xl flex items-center gap-3 max-w-sm"
+    >
+      <div
+        class="w-9 h-9 rounded-xl bg-cyan-500/10 text-brand-cyan flex items-center justify-center text-lg flex-shrink-0"
+      >
+        <i class="fa-solid fa-bell"></i>
+      </div>
+      <div>
+        <h5 class="text-xs font-bold text-white" id="toastTitle">
+          تنبيه الموعد
+        </h5>
+        <p class="text-[11px] text-brand-muted" id="toastBody">
+          تفاصيل التنبيه...
+        </p>
+      </div>
+    </div>
+
+    <!-- ================= SYSTEM SCRIPT: STATE, AUTOMATIC RESET, & WHATSAPP ================= -->
+    <script>
+      // ------------------------------------------------------------------
+      // CONSTANTS & 39 HABITS LIST
+      // ------------------------------------------------------------------
+      const USER_PHONE = "201095622134"; // 01095622134
+
+      const HABITS = [
+        // 1. العبادات والسنن (14)
+        { id: "h1", title: "صلاة الفجر", cat: "العبادات والسنن" },
+        { id: "h2", title: "سنة الفجر", cat: "العبادات والسنن" },
+        { id: "h3", title: "جلسة الشروق", cat: "العبادات والسنن" },
+        { id: "h4", title: "أربع ركعات صلاة الضحى", cat: "العبادات والسنن" },
+        { id: "h5", title: "صلاة الظهر", cat: "العبادات والسنن" },
+        { id: "h6", title: "سنة الظهر", cat: "العبادات والسنن" },
+        {
+          id: "h7",
+          title: "أربع ركعات بين أذان وإقامة العصر",
+          cat: "العبادات والسنن",
+        },
+        { id: "h8", title: "صلاة العصر", cat: "العبادات والسنن" },
+        { id: "h9", title: "صلاة المغرب", cat: "العبادات والسنن" },
+        { id: "h10", title: "سنة المغرب", cat: "العبادات والسنن" },
+        { id: "h11", title: "صلاة العشاء", cat: "العبادات والسنن" },
+        { id: "h12", title: "سنة العشاء", cat: "العبادات والسنن" },
+        { id: "h13", title: "الشفع والوتر", cat: "العبادات والسنن" },
+        { id: "h14", title: "قيام الليل", cat: "العبادات والسنن" },
+
+        // 2. القرآن والأذكار (12)
+        { id: "h15", title: "أذكار الصباح", cat: "القرآن والأذكار" },
+        { id: "h16", title: "أذكار المساء", cat: "القرآن والأذكار" },
+        { id: "h17", title: "أذكار النوم", cat: "القرآن والأذكار" },
+        {
+          id: "h18",
+          title: "ورد ذكر واستغفار 100 مرة",
+          cat: "القرآن والأذكار",
+        },
+        {
+          id: "h19",
+          title: "ورد القرآن جزء كامل يومياً",
+          cat: "القرآن والأذكار",
+        },
+        {
+          id: "h20",
+          title: "حفظ ومراجعة القرآن الكريم",
+          cat: "القرآن والأذكار",
+        },
+        { id: "h21", title: "قراءة سورة البقرة", cat: "القرآن والأذكار" },
+        { id: "h22", title: "قراءة سورة الكهف", cat: "القرآن والأذكار" },
+        { id: "h23", title: "قراءة سورة يس", cat: "القرآن والأذكار" },
+        { id: "h24", title: "قراءة سورة الواقعة", cat: "القرآن والأذكار" },
+        { id: "h25", title: "قراءة سورة الملك", cat: "القرآن والأذكار" },
+        { id: "h26", title: "الدعاء بعد الصلاة", cat: "القرآن والأذكار" },
+
+        // 3. الصحة والعناية الشخصية (8)
+        {
+          id: "h27",
+          title: "سكين كير للوجه أول ما أصحى",
+          cat: "الصحة والعناية الشخصية",
+        },
+        {
+          id: "h28",
+          title: "غسيل الأسنان أول ما أصحى",
+          cat: "الصحة والعناية الشخصية",
+        },
+        {
+          id: "h29",
+          title: "سكين كير للوجه قبل النوم",
+          cat: "الصحة والعناية الشخصية",
+        },
+        {
+          id: "h30",
+          title: "غسيل الأسنان قبل النوم",
+          cat: "الصحة والعناية الشخصية",
+        },
+        {
+          id: "h31",
+          title: "شرب 3 لتر ماء خلال اليوم",
+          cat: "الصحة والعناية الشخصية",
+        },
+        {
+          id: "h32",
+          title: "أخذ برشام الحبوب 20 مجم",
+          cat: "الصحة والعناية الشخصية",
+        },
+        {
+          id: "h33",
+          title: "أخذ برشام الحبوب 10 مجم",
+          cat: "الصحة والعناية الشخصية",
+        },
+        {
+          id: "h34",
+          title: "أخذ الفيتامينات اليومية",
+          cat: "الصحة والعناية الشخصية",
+        },
+
+        // 4. اللياقة والتطوير الشخصي (5)
+        {
+          id: "h35",
+          title: "مذاكرة مواد الكلية ومشاريعها",
+          cat: "اللياقة والتطوير الشخصي",
+        },
+        {
+          id: "h36",
+          title: "حلقة التعليم الأسبوعية",
+          cat: "اللياقة والتطوير الشخصي",
+        },
+        {
+          id: "h37",
+          title: "جيم أو تمارين رياضية في البيت",
+          cat: "اللياقة والتطوير الشخصي",
+        },
+        {
+          id: "h38",
+          title: "جري أو إتمام 5000 خطوة مشي",
+          cat: "اللياقة والتطوير الشخصي",
+        },
+        {
+          id: "h39",
+          title: "الدعاء للزوجة المستقبلية",
+          cat: "اللياقة والتطوير الشخصي",
+        },
+      ];
+
+      // Master Timetable with exact start times for 1-hour prior alerts
+      const WEEKLY_SCHEDULE = {
+        السبت: {
+          college: "سكشن سيليكتيد (Selected Topics)",
+          collegeTime: "11:00 ص - 1:00 م",
+          collegeHourStart: 11,
+          track: "—",
+          trackTime: "",
+          activities: "مراجعة مشاريع الكلية ومذاكرة المواد",
+          notes: "حضور بالكلية وتسليم التكليفات",
+        },
+        الأحد: {
+          college: "سكشن إمبيدد (1:00 - 2:00 م) • سكشن جرافيك (5:00 - 6:00 م)",
+          collegeTime: "1:00 م - 6:00 م",
+          collegeHourStart: 13,
+          track: "تدريب إسلام (الساعة 6:00 مساءً)",
+          trackTime: "6:00 م",
+          trackHourStart: 18,
+          activities: "الجولة من المغرب والمشورة",
+          notes: "⚠️ تنبيه: سكشن جرافيك ينتهي 6:00 بالتزامن مع تدريب إسلام",
+        },
+        الاثنين: {
+          college: "— (لا توجد سكاشن حضورية)",
+          collegeTime: "",
+          track: "تدريب NextGen (الساعة 9:00 مساءً)",
+          trackTime: "9:00 م",
+          trackHourStart: 21,
+          activities: "مشورة المحافظة أو شعبة الطلبة من العصر",
+          notes: "تركيز مسائي على تدريب الباك إند مع NextGen",
+        },
+        الثلاثاء: {
+          college: "— (مذاكرة ذاتية ومتابعة مشاريع)",
+          collegeTime: "",
+          track: "تدريب إسلام (الساعة 6:00 مساءً)",
+          trackTime: "6:00 م",
+          trackHourStart: 18,
+          activities: "حلقة تعليم النساء بعد العصر",
+          activities: "حلقة تحفيظ قرآن الساعه 8 مساءً",
+          notes: "متابعة المشاريع والمسار البرمجي",
+        },
+        الأربعاء: {
+          college: "— (يوم عمل ومشاريع)",
+          collegeTime: "",
+          track: "",
+          trackTime: "",
+          trackHourStart: 18,
+          activities: "اللقاء مع العشاء",
+          notes: "متابعة المشاريع ومذاكرة المواد",
+        },
+        الخميس: {
+          college:
+            "سكشن كوميونيكيشن (11:00 - 1:00 م) • سكشن نيتورك (12:00 - 2:00 م)",
+          collegeTime: "11:00 ص - 2:00 م",
+          collegeHourStart: 11,
+          track: "تدريب إسلام (الساعة 6:00 مساءً)",
+          trackTime: "6:00 م",
+          trackHourStart: 18,
+          activities: "الجوله مع المغرب",
+          notes: "حضور بالكلية وتدريب إسلام مساءً",
+        },
+        الجمعة: {
+          college: "راحة واستراحة أسبوعية",
+          collegeTime: "طوال اليوم",
+          track: "—",
+          trackTime: "",
+          activities: "مشورة الشعبة الفجر • صلاة الجمعة • سورة الكهف",
+          notes: "يوم العائلة وورد القرآن والراحة",
+        },
+      };
+
+      // 20-day plan dates list
+      const DAYS_20 = [
+        { date: "17/10/2026", dayName: "السبت" },
+        { date: "18/10/2026", dayName: "الأحد" },
+        { date: "19/10/2026", dayName: "الاثنين" },
+        { date: "20/10/2026", dayName: "الثلاثاء" },
+        { date: "21/10/2026", dayName: "الأربعاء" },
+        { date: "22/10/2026", dayName: "الخميس" },
+        { date: "23/10/2026", dayName: "الجمعة" },
+        { date: "24/10/2026", dayName: "السبت" },
+        { date: "25/10/2026", dayName: "الأحد" },
+        { date: "26/10/2026", dayName: "الاثنين" },
+        { date: "27/10/2026", dayName: "الثلاثاء" },
+        { date: "28/10/2026", dayName: "الأربعاء" },
+        { date: "29/10/2026", dayName: "الخميس" },
+        { date: "30/10/2026", dayName: "الجمعة" },
+        { date: "31/10/2026", dayName: "السبت" },
+        { date: "01/11/2026", dayName: "الأحد" },
+        { date: "02/11/2026", dayName: "الاثنين" },
+        { date: "03/11/2026", dayName: "الثلاثاء" },
+        { date: "04/11/2026", dayName: "الأربعاء" },
+        { date: "05/11/2026", dayName: "الخميس" },
+      ];
+
+      // State Variables
+      let currentSelectedDate = "17/10/2026";
+      let currentCategory = "all";
+      let habitsState = {}; // { [habitId]: boolean }
+      let waterLevel = 1;
+
+      // ------------------------------------------------------------------
+      // AUTOMATIC DAILY RESET (التصفير التلقائي اليومي)
+      // ------------------------------------------------------------------
+      function handleDailyAutoReset() {
+        const todayRealDateKey = new Date().toISOString().split("T")[0]; // e.g. 2026-10-17
+        const lastVisitKey = localStorage.getItem("kareem_last_visit_date");
+
+        if (!lastVisitKey) {
+          // First time opening the system: mark today and set initial defaults (6 done for day 1)
+          localStorage.setItem("kareem_last_visit_date", todayRealDateKey);
+          initDefaultDay1Habits();
+        } else if (lastVisitKey !== todayRealDateKey) {
+          // A new calendar day has arrived! Automatically reset all checkboxes to unchecked
+          console.log(
+            `[Auto-Reset] New day detected (${todayRealDateKey} vs ${lastVisitKey}). Resetting checkboxes.`,
+          );
+          resetAllHabitsToUnchecked();
+          localStorage.setItem("kareem_last_visit_date", todayRealDateKey);
+          showToast(
+            "صباح الخير يا كريم!",
+            "تم تصفير مهام اليوم تلقائياً لتبدأ صفحة جديدة ونشيطة.",
+          );
+        } else {
+          // Same day: load state from localStorage if exists
+          loadHabitsFromStorage();
+        }
+      }
+
+      function initDefaultDay1Habits() {
+        habitsState = {};
+        const completedDay1 = ["h1", "h4", "h15", "h19", "h27", "h28"];
+        HABITS.forEach((h) => {
+          habitsState[h.id] = completedDay1.includes(h.id);
+        });
+        saveHabitsToStorage();
+      }
+
+      function resetAllHabitsToUnchecked() {
+        habitsState = {};
+        HABITS.forEach((h) => {
+          habitsState[h.id] = false;
+        });
+        setWater(1);
+        saveHabitsToStorage();
+        renderHabitsGrid();
+        recalcMetrics();
+      }
+
+      function manualResetDailyHabits() {
+        resetAllHabitsToUnchecked();
+        showToast(
+          "تم التصفير اليدوي",
+          "تمت إعادة ضبط جميع المهام إلى البداية بنجاح.",
+        );
+      }
+
+      function checkAllHabits() {
+        HABITS.forEach((h) => {
+          habitsState[h.id] = true;
+        });
+        setWater(3);
+        saveHabitsToStorage();
+        renderHabitsGrid();
+        recalcMetrics();
+        showToast("ما شاء الله!", "تم تحديد جميع الـ 39 عادة كمكتملة.");
+      }
+
+      function saveHabitsToStorage() {
+        localStorage.setItem(
+          `kareem_habits_${currentSelectedDate}`,
+          JSON.stringify(habitsState),
+        );
+      }
+
+      function loadHabitsFromStorage() {
+        const saved = localStorage.getItem(
+          `kareem_habits_${currentSelectedDate}`,
+        );
+        if (saved) {
+          try {
+            habitsState = JSON.parse(saved);
+          } catch (e) {
+            initDefaultDay1Habits();
+          }
+        } else {
+          // If not found for this specific date, start fresh
+          resetAllHabitsToUnchecked();
+        }
+      }
+
+      // ------------------------------------------------------------------
+      // RENDER 39 HABITS (COMPACT 2-COLUMN CHIP DESIGN)
+      // ------------------------------------------------------------------
+      function renderHabitsGrid() {
+        const container = document.getElementById("habitsGrid");
+        container.innerHTML = "";
+
+        const filtered = HABITS.filter((h) => {
+          if (currentCategory === "all") return true;
+          return h.cat === currentCategory;
+        });
+
+        document.getElementById("filterCountBadge").textContent =
+          `${filtered.length} مهمة`;
+
+        filtered.forEach((habit) => {
+          const isDone = !!habitsState[habit.id];
+
+          const card = document.createElement("div");
+          card.id = `habit-box-${habit.id}`;
+          card.className = `p-2.5 rounded-xl border flex items-center justify-between gap-2.5 transition-colors cursor-pointer select-none ${
+            isDone
+              ? "bg-emerald-950/25 border-emerald-500/40 text-white"
+              : "bg-brand-cardInner border-brand-border text-brand-muted hover:border-brand-borderLight"
+          }`;
+
+          // Click on entire chip to toggle
+          card.onclick = (e) => {
+            if (e.target.tagName !== "INPUT") {
+              toggleHabit(habit.id, !habitsState[habit.id]);
+            }
+          };
+
+          const left = document.createElement("div");
+          left.className = "flex items-center gap-2.5 overflow-hidden";
+
+          const chk = document.createElement("input");
+          chk.type = "checkbox";
+          chk.className = "custom-checkbox";
+          chk.checked = isDone;
+          chk.onchange = (e) => toggleHabit(habit.id, e.target.checked);
+
+          const title = document.createElement("span");
+          title.id = `habit-title-${habit.id}`;
+          title.className = `text-xs font-semibold truncate ${isDone ? "line-through text-emerald-300" : "text-brand-text"}`;
+          title.textContent = habit.title;
+
+          left.appendChild(chk);
+          left.appendChild(title);
+
+          // Small category pill
+          const pill = document.createElement("span");
+          pill.className =
+            "text-[9px] px-1.5 py-0.5 rounded bg-brand-border text-brand-muted tech-font flex-shrink-0";
+          pill.textContent = habit.cat.split(" ")[0];
+
+          card.appendChild(left);
+          card.appendChild(pill);
+          container.appendChild(card);
+        });
+      }
+
+      function toggleHabit(id, isDone) {
+        habitsState[id] = isDone;
+        saveHabitsToStorage();
+
+        // Surgical DOM update (no layout shifts)
+        const box = document.getElementById(`habit-box-${id}`);
+        const title = document.getElementById(`habit-title-${id}`);
+        if (box && title) {
+          const chk = box.querySelector('input[type="checkbox"]');
+          if (chk) chk.checked = isDone;
+
+          if (isDone) {
+            box.className =
+              "p-2.5 rounded-xl border flex items-center justify-between gap-2.5 transition-colors cursor-pointer select-none bg-emerald-950/25 border-emerald-500/40 text-white";
+            title.className =
+              "text-xs font-semibold truncate line-through text-emerald-300";
+          } else {
+            box.className =
+              "p-2.5 rounded-xl border flex items-center justify-between gap-2.5 transition-colors cursor-pointer select-none bg-brand-cardInner border-brand-border text-brand-muted hover:border-brand-borderLight";
+            title.className = "text-xs font-semibold truncate text-brand-text";
+          }
+        }
+
+        recalcMetrics();
+      }
+
+      function filterCategory(cat) {
+        currentCategory = cat;
+        document.querySelectorAll(".cat-pill").forEach((btn) => {
+          if (btn.dataset.cat === cat) {
+            btn.className =
+              "cat-pill px-2.5 py-1 rounded-lg bg-brand-cyan text-brand-bg transition-colors";
+          } else {
+            btn.className =
+              "cat-pill px-2.5 py-1 rounded-lg text-brand-muted hover:text-white transition-colors";
+          }
+        });
+        renderHabitsGrid();
+      }
+
+      // ------------------------------------------------------------------
+      // METRICS RECALCULATION
+      // ------------------------------------------------------------------
+      function recalcMetrics() {
+        let count = 0;
+        for (const k in habitsState) {
+          if (habitsState[k]) count++;
+        }
+        const pct = (count / HABITS.length) * 100;
+
+        document.getElementById("kpiTasksDone").textContent = count;
+        document.getElementById("kpiPercentage").textContent =
+          pct.toFixed(1) + "%";
+
+        // SVG Ring
+        const circle = document.getElementById("kpiCircleGauge");
+        if (circle) {
+          const offset = 100 - pct;
+          circle.style.strokeDashoffset = offset;
+        }
+      }
+
+      // ------------------------------------------------------------------
+      // WATER TRACKER
+      // ------------------------------------------------------------------
+      function setWater(liters) {
+        waterLevel = liters;
+        document.querySelectorAll(".water-pill").forEach((btn, idx) => {
+          if (idx + 1 <= liters) {
+            btn.className =
+              "water-pill px-2 py-0.5 rounded-md text-[10px] font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 tech-font";
+          } else {
+            btn.className =
+              "water-pill px-2 py-0.5 rounded-md text-[10px] font-bold bg-brand-cardInner text-brand-muted border border-brand-border tech-font";
+          }
+        });
+        if (liters >= 3) {
+          toggleHabit("h31", true);
+        }
+      }
+
+      // ------------------------------------------------------------------
+      // SCHEDULE UPDATES & WHATSAPP GENERATOR
+      // ------------------------------------------------------------------
+      function updateScheduleView() {
+        const cur =
+          DAYS_20.find((d) => d.date === currentSelectedDate) || DAYS_20[0];
+        const sched = WEEKLY_SCHEDULE[cur.dayName] || WEEKLY_SCHEDULE["السبت"];
+
+        document.getElementById("todayScheduleTitle").textContent =
+          `${cur.dayName} (${cur.date})`;
+        document.getElementById("topDateDisplay").textContent =
+          `${cur.dayName}، ${cur.date} • الفرقة الرابعة IT`;
+
+        const container = document.getElementById("todayScheduleContainer");
+        container.innerHTML = `
+        <div class="p-2.5 rounded-xl bg-brand-cardInner border border-brand-border">
+          <span class="text-[10px] text-brand-muted font-bold block">السكاشن والمواد الجامعية:</span>
+          <span class="text-xs font-bold text-white block mt-0.5">${sched.college}</span>
+          ${sched.collegeTime ? `<span class="text-[10px] text-brand-cyan tech-font font-semibold">${sched.collegeTime}</span>` : ""}
+        </div>
+
+        <div class="p-2.5 rounded-xl bg-brand-cardInner border border-brand-border">
+          <span class="text-[10px] text-brand-muted font-bold block">التدريب والمسار التقني:</span>
+          <span class="text-xs font-bold text-brand-cyan block mt-0.5">${sched.track}</span>
+        </div>
+
+        <div class="p-2.5 rounded-xl bg-brand-cardInner border border-brand-border">
+          <span class="text-[10px] text-brand-muted font-bold block">المشورة والأنشطة:</span>
+          <span class="text-xs font-medium text-brand-text block mt-0.5">${sched.activities}</span>
+        </div>
+
+        ${
+          sched.notes.includes("⚠️")
+            ? `
+          <div class="p-2 rounded-xl bg-amber-950/30 border border-amber-500/30 text-amber-300 text-[11px] font-medium">
+            ${sched.notes}
+          </div>
+        `
+            : `
+          <div class="text-[11px] text-brand-muted px-1">
+            ملاحظة: <span class="text-white">${sched.notes}</span>
+          </div>
+        `
+        }
+      `;
+
+        // Next reminder text
+        const nextTxt = sched.track !== "—" ? sched.track : sched.college;
+        document.getElementById("nextUpcomingReminderText").textContent =
+          nextTxt.split("(")[0];
+      }
+
+      // WHATSAPP: Direct pre-filled WhatsApp alert 1 hour prior
+      function triggerDirectWhatsAppReminder() {
+        const cur =
+          DAYS_20.find((d) => d.date === currentSelectedDate) || DAYS_20[0];
+        const sched = WEEKLY_SCHEDULE[cur.dayName] || WEEKLY_SCHEDULE["السبت"];
+
+        let message = `🔔 *تذكير كريم فرج (قبل الموعد بساعة)* 🔔\n\n`;
+        message += `📅 اليوم: ${cur.dayName} (${cur.date})\n`;
+        if (
+          sched.college &&
+          sched.college !== "— (لا توجد سكاشن حضورية)" &&
+          sched.college !== "راحة واستراحة أسبوعية"
+        ) {
+          message += `🎓 الكلية والسكاشن: ${sched.college} [${sched.collegeTime}]\n`;
+        }
+        if (sched.track && sched.track !== "—") {
+          message += `💻 التدريب البرمجي: ${sched.track}\n`;
+        }
+        if (sched.activities && sched.activities !== "—") {
+          message += `🕌 الأنشطة والمشورة: ${sched.activities}\n`;
+        }
+        message += `\n⚡ استعد، الموعد سيبدأ بعد ساعة واحدة بإذن الله!`;
+
+        const encoded = encodeURIComponent(message);
+        const url = `https://wa.me/${USER_PHONE}?text=${encoded}`;
+        window.open(url, "_blank");
+      }
+
+      // Send complete day summary to WhatsApp
+      function sendTodayScheduleToWhatsApp() {
+        const cur =
+          DAYS_20.find((d) => d.date === currentSelectedDate) || DAYS_20[0];
+        const sched = WEEKLY_SCHEDULE[cur.dayName] || WEEKLY_SCHEDULE["السبت"];
+
+        let message = `📋 *ملخص غرفة عمليات كريم فرج اليومية* 📋\n\n`;
+        message += `📅 تاريخ اليوم: ${cur.dayName} (${cur.date})\n`;
+        message += `-------------------------\n`;
+        message += `📚 السكاشن: ${sched.college} (${sched.collegeTime || "أونلاين/مذاكرة"})\n`;
+        message += `💻 المسار التقني: ${sched.track}\n`;
+        message += `🕊️ المشورة والأنشطة: ${sched.activities}\n`;
+        message += `💧 هدف الماء: 3 لتر\n`;
+        message += `📝 ملاحظات: ${sched.notes}\n\n`;
+        message += `رابط غرفة العمليات: ${window.location.href}`;
+
+        const encoded = encodeURIComponent(message);
+        const url = `https://wa.me/${USER_PHONE}?text=${encoded}`;
+        window.open(url, "_blank");
+      }
+
+      // ------------------------------------------------------------------
+      // BROWSER WEB NOTIFICATIONS (1-HOUR PRIOR NOTIFICATION API)
+      // ------------------------------------------------------------------
+      function toggleWebNotifications() {
+        if (!("Notification" in window)) {
+          showToast("غير مدعوم", "متصفحك لا يدعم الإشعارات المباشرة.");
+          return;
+        }
+
+        if (Notification.permission === "granted") {
+          showToast(
+            "الإشعارات مفعلة بالفعل",
+            "سيتم تنبيهك قبل مواعيدك وسكاشنك بساعة.",
+          );
+          new Notification("مركز عمليات كريم فرج", {
+            body: "نظام الإشعارات شغال بنجاح وسينبهك قبل مواعيدك بساعة!",
+            icon: "https://cdn-icons-png.flaticon.com/512/3119/3119338.png",
+          });
+        } else {
+          Notification.requestPermission().then((permission) => {
+            if (permission === "granted") {
+              document.getElementById("notifyText").textContent =
+                "التنبيهات مفعلة";
+              document.getElementById("notifyIcon").className =
+                "fa-solid fa-bell text-emerald-400";
+              showToast(
+                "تم التفعيل ✅",
+                "ستصلك إشعارات قبل بدء السكاشن والتدريب بـ 60 دقيقة.",
+              );
+              new Notification("مركز عمليات كريم فرج", {
+                body: "أهلاً يا كريم، تم تفعيل التنبيهات المسبقة بساعة بنجاح!",
+              });
+            }
+          });
+        }
+      }
+
+      // Periodic check for 1-hour prior web alerts
+      function checkHourlyScheduleAlerts() {
+        if (Notification.permission !== "granted") return;
+
+        const now = new Date();
+        const currentHour = now.getHours();
+        const dayNamesMap = [
+          "الأحد",
+          "الاثنين",
+          "الثلاثاء",
+          "الأربعاء",
+          "الخميس",
+          "الجمعة",
+          "السبت",
+        ];
+        const todayName = dayNamesMap[now.getDay()];
+        const sched = WEEKLY_SCHEDULE[todayName];
+
+        if (!sched) return;
+
+        // Check college section (starts in 1 hour)
+        if (
+          sched.collegeHourStart &&
+          sched.collegeHourStart - currentHour === 1
+        ) {
+          new Notification("⏰ تنبيه قبل ساعة!", {
+            body: `يا كريم، عندك ${sched.college} هيبدأ بعد ساعة (${sched.collegeTime})!`,
+            icon: "https://cdn-icons-png.flaticon.com/512/3119/3119338.png",
+          });
+        }
+
+        // Check training (starts in 1 hour)
+        if (sched.trackHourStart && sched.trackHourStart - currentHour === 1) {
+          new Notification("💻 تنبيه التدريب التقني!", {
+            body: `يا كريم، ${sched.track} هيبدأ كمان ساعة! جهز نفسك واللاب.`,
+            icon: "https://cdn-icons-png.flaticon.com/512/3119/3119338.png",
+          });
+        }
+      }
+
+      // ------------------------------------------------------------------
+      // PRIORITIES & REFLECTION PERSISTENCE
+      // ------------------------------------------------------------------
+      function savePriorities() {
+        const data = {
+          c1: document.getElementById("prioCheck1").checked,
+          t1: document.getElementById("prioText1").value,
+          c2: document.getElementById("prioCheck2").checked,
+          t2: document.getElementById("prioText2").value,
+          c3: document.getElementById("prioCheck3").checked,
+          t3: document.getElementById("prioText3").value,
+        };
+        localStorage.setItem(
+          `kareem_priorities_${currentSelectedDate}`,
+          JSON.stringify(data),
+        );
+      }
+
+      function loadPriorities() {
+        const saved = localStorage.getItem(
+          `kareem_priorities_${currentSelectedDate}`,
+        );
+        if (saved) {
+          const d = JSON.parse(saved);
+          document.getElementById("prioCheck1").checked = !!d.c1;
+          document.getElementById("prioText1").value = d.t1 || "";
+          document.getElementById("prioCheck2").checked = !!d.c2;
+          document.getElementById("prioText2").value = d.t2 || "";
+          document.getElementById("prioCheck3").checked = !!d.c3;
+          document.getElementById("prioText3").value = d.t3 || "";
+        } else {
+          document.getElementById("prioCheck1").checked = false;
+          document.getElementById("prioText1").value =
+            "حضور سكشن سيليكتيد (Selected Topics)";
+          document.getElementById("prioCheck2").checked = false;
+          document.getElementById("prioText2").value =
+            "إنجاز مهام تدريب NextGen ومراجعة الكود";
+          document.getElementById("prioCheck3").checked = false;
+          document.getElementById("prioText3").value =
+            "الالتزام بورد جزء القرآن وصلاة الجماعة";
+        }
+      }
+
+      function saveReflection() {
+        const text = document.getElementById("eveningNotes").value;
+        localStorage.setItem(`kareem_notes_${currentSelectedDate}`, text);
+      }
+
+      function loadReflection() {
+        const text = localStorage.getItem(
+          `kareem_notes_${currentSelectedDate}`,
+        );
+        document.getElementById("eveningNotes").value = text || "";
+      }
+
+      // ------------------------------------------------------------------
+      // MINI WEEKLY OVERVIEW POPULATION
+      // ------------------------------------------------------------------
+      function renderMiniWeekly() {
+        const list = document.getElementById("miniWeeklySchedule");
+        list.innerHTML = "";
+        const order = [
+          "السبت",
+          "الأحد",
+          "الاثنين",
+          "الثلاثاء",
+          "الأربعاء",
+          "الخميس",
+          "الجمعة",
+        ];
+
+        order.forEach((day) => {
+          const s = WEEKLY_SCHEDULE[day];
+          const isCurrent = day === "السبت";
+          const item = document.createElement("div");
+          item.className = `p-2 rounded-xl text-xs flex items-center justify-between gap-2 border ${
+            isCurrent
+              ? "bg-cyan-950/20 border-brand-cyan/40 text-white"
+              : "bg-brand-cardInner border-brand-border text-brand-muted"
+          }`;
+          item.innerHTML = `
+          <div class="flex items-center gap-1.5 truncate">
+            <b class="text-white text-xs">${day}:</b>
+            <span class="truncate text-[11px]">${s.college.split("•")[0]}</span>
+          </div>
+          <span class="text-[10px] text-brand-cyan flex-shrink-0 tech-font">${s.track !== "—" ? s.track.split("(")[0] : "—"}</span>
+        `;
+          list.appendChild(item);
+        });
+      }
+
+      // ------------------------------------------------------------------
+      // TOAST NOTIFIER
+      // ------------------------------------------------------------------
+      function showToast(title, body) {
+        const t = document.getElementById("notificationToast");
+        document.getElementById("toastTitle").textContent = title;
+        document.getElementById("toastBody").textContent = body;
+        t.classList.remove("translate-y-24", "opacity-0");
+        setTimeout(() => {
+          t.classList.add("translate-y-24", "opacity-0");
+        }, 3500);
+      }
+
+      // Live clock
+      function initClock() {
+        function tick() {
+          const d = new Date();
+          document.getElementById("liveClock").textContent =
+            d.toLocaleTimeString("en-US", { hour12: false });
+        }
+        tick();
+        setInterval(tick, 1000);
+        // Check 1-hour alerts every 5 minutes
+        setInterval(checkHourlyScheduleAlerts, 5 * 60 * 1000);
+      }
+
+      // ------------------------------------------------------------------
+      // INIT
+      // ------------------------------------------------------------------
+      window.addEventListener("DOMContentLoaded", () => {
+        // Setup dropdown
+        const sel = document.getElementById("daySelect");
+        DAYS_20.forEach((d) => {
+          const opt = document.createElement("option");
+          opt.value = d.date;
+          opt.textContent = `${d.dayName} (${d.date})${d.date === "17/10/2026" ? " • اليوم" : ""}`;
+          sel.appendChild(opt);
+        });
+
+        sel.addEventListener("change", (e) => {
+          currentSelectedDate = e.target.value;
+          loadHabitsFromStorage();
+          loadPriorities();
+          loadReflection();
+          updateScheduleView();
+          renderHabitsGrid();
+          recalcMetrics();
+        });
+
+        // Daily Reset verification
+        handleDailyAutoReset();
+
+        // UI Views
+        updateScheduleView();
+        renderHabitsGrid();
+        recalcMetrics();
+        renderMiniWeekly();
+        loadPriorities();
+        loadReflection();
+        initClock();
+
+        // Check notification status
+        if ("Notification" in window && Notification.permission === "granted") {
+          document.getElementById("notifyText").textContent = "التنبيهات مفعلة";
+          document.getElementById("notifyIcon").className =
+            "fa-solid fa-bell text-emerald-400";
+        }
+      });
+    </script>
+  </body>
+</html>
