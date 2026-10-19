@@ -1,2320 +1,2294 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>مركز القيادة والعمليات اليومية | كريم فرج</title>
-    <link rel="icon" type="image" href="13 (36).jpg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@600;700;800&family=JetBrains+Mono:wght@500;700&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      :root {
-        --bg-base: #07090e;
-        --bg-surface: #0d121d;
-        --bg-card: #121929;
-        --bg-card-hover: #182238;
-        --bg-elevated: #1a253c;
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>مركز القيادة والعمليات اليومية | كريم فرج</title>
+      <link rel="icon" type="image" href="13 (36).jpg" />
 
-        --border-subtle: rgba(255, 255, 255, 0.05);
-        --border-default: #1e2b45;
-        --border-focused: #38bdf8;
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome 6 (CDN for crisp high-end icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Animate.css for micro-interactions -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  
+  <!-- Canvas Confetti for celebratory task completion -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
 
-        --cyan: #38bdf8;
-        --cyan-glow: rgba(56, 189, 248, 0.25);
-        --emerald: #10b981;
-        --emerald-glow: rgba(16, 185, 129, 0.25);
-        --amber: #f59e0b;
-        --amber-glow: rgba(245, 158, 11, 0.25);
-        --rose: #f43f5e;
-        --rose-glow: rgba(244, 63, 94, 0.25);
-        --indigo: #6366f1;
+  <style>
+    :root {
+      --bg-base: #06080d;
+      --bg-surface: #0c101a;
+      --bg-card: #111726;
+      --bg-card-hover: #172033;
+      --bg-elevated: #1a243a;
+      
+      --border-subtle: rgba(255, 255, 255, 0.05);
+      --border-default: #1b263b;
+      --border-focused: #38bdf8;
+      
+      --cyan: #38bdf8;
+      --cyan-glow: rgba(56, 189, 248, 0.25);
+      --emerald: #10b981;
+      --emerald-glow: rgba(16, 185, 129, 0.25);
+      --amber: #f59e0b;
+      --amber-glow: rgba(245, 158, 11, 0.25);
+      --rose: #f43f5e;
+      --rose-glow: rgba(244, 63, 94, 0.25);
+      --indigo: #6366f1;
+      
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-tertiary: #64748b;
+      
+      --radius-xs: 6px;
+      --radius-sm: 10px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+      
+      --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+    }
 
-        --text-primary: #f8fafc;
-        --text-secondary: #94a3b8;
-        --text-tertiary: #64748b;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-        --radius-sm: 8px;
-        --radius-md: 14px;
-        --radius-lg: 20px;
-        --radius-full: 9999px;
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 10% 5%, rgba(56, 189, 248, 0.04) 0%, transparent 35%),
+        radial-gradient(circle at 90% 40%, rgba(99, 102, 241, 0.04) 0%, transparent 40%);
+      background-attachment: fixed;
+    }
 
-        --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-        --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
-        --shadow-glow: 0 0 25px rgba(56, 189, 248, 0.15);
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg-base); }
+    ::-webkit-scrollbar-thumb { background: var(--border-default); border-radius: var(--radius-full); }
+    ::-webkit-scrollbar-thumb:hover { background: var(--cyan); }
 
-        --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+    /* Top Sticky App Bar */
+    header {
+      background: rgba(12, 16, 26, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      padding: 0.65rem 1.25rem;
+      transition: all 0.2s ease;
+    }
+
+    .header-inner {
+      max-width: 1480px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .pulse-indicator {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--emerald);
+      box-shadow: 0 0 10px var(--emerald);
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .pulse-indicator::after {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      border: 1px solid var(--emerald);
+      animation: pulseAnim 2.2s infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes pulseAnim {
+      0% { transform: scale(0.9); opacity: 0.8; }
+      50% { transform: scale(1.6); opacity: 0; }
+      100% { transform: scale(0.9); opacity: 0; }
+    }
+
+    .brand-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: -0.2px;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      white-space: nowrap;
+    }
+
+    .brand-tag {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--cyan);
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      padding: 2px 7px;
+      border-radius: var(--radius-xs);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Buttons System */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.48rem 0.9rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: transform 0.15s var(--ease-spring), background 0.15s, border-color 0.15s, box-shadow 0.15s;
+      user-select: none;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn:active {
+      transform: scale(0.96);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #0284c7, var(--cyan));
+      color: #06080d;
+      box-shadow: 0 4px 12px var(--cyan-glow);
+    }
+    .btn-primary:hover {
+      box-shadow: 0 6px 18px var(--cyan-glow);
+      filter: brightness(1.08);
+    }
+
+    .btn-ghost {
+      background: var(--bg-card);
+      color: var(--text-primary);
+      border-color: var(--border-default);
+    }
+    .btn-ghost:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--cyan);
+    }
+
+    .btn-emerald {
+      background: rgba(16, 185, 129, 0.12);
+      color: var(--emerald);
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+    .btn-emerald:hover {
+      background: var(--emerald);
+      color: #06080d;
+      box-shadow: 0 0 14px var(--emerald-glow);
+    }
+
+    .btn-danger {
+      background: rgba(244, 63, 94, 0.1);
+      color: var(--rose);
+      border-color: rgba(244, 63, 94, 0.25);
+    }
+    .btn-danger:hover {
+      background: var(--rose);
+      color: #fff;
+      box-shadow: 0 0 14px var(--rose-glow);
+    }
+
+    .btn-icon-square {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border-default);
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.15s var(--ease-spring);
+    }
+    .btn-icon-square:hover {
+      color: var(--text-primary);
+      border-color: var(--cyan);
+      background: var(--bg-card-hover);
+    }
+
+    /* Mobile Quick Action FAB */
+    .mobile-menu-trigger {
+      display: none;
+    }
+
+    /* Main Container */
+    main {
+      max-width: 1480px;
+      width: 100%;
+      margin: 1rem auto;
+      padding: 0 1.25rem 4rem 1.25rem;
+      flex: 1;
+    }
+
+    /* Date Command Bar */
+    .date-command-bar {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.85rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .date-nav-group {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .day-pill-strip {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      overflow-x: auto;
+      padding: 2px 0;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .day-pill-strip::-webkit-scrollbar { display: none; }
+
+    .day-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      padding: 0.38rem 0.8rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+
+    .day-pill:hover {
+      border-color: var(--cyan);
+      color: var(--text-primary);
+    }
+
+    .day-pill.active {
+      background: rgba(56, 189, 248, 0.12);
+      border-color: var(--cyan);
+      color: var(--cyan);
+      box-shadow: 0 0 12px var(--cyan-glow);
+    }
+
+    .day-pill .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--text-tertiary);
+    }
+    .day-pill.active .dot { background: var(--cyan); }
+
+    /* KPI Summary Matrix */
+    .kpi-matrix {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.85rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .kpi-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-md);
+      padding: 0.95rem 1.15rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s var(--ease-spring), border-color 0.2s;
+    }
+
+    .kpi-box:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-focused);
+    }
+
+    .kpi-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 3px;
+      background: var(--cyan);
+    }
+    .kpi-box.emerald::before { background: var(--emerald); }
+    .kpi-box.amber::before { background: var(--amber); }
+    .kpi-box.indigo::before { background: var(--indigo); }
+
+    .kpi-content h4 {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      margin-bottom: 0.3rem;
+    }
+
+    .kpi-metric {
+      font-size: 1.55rem;
+      font-weight: 800;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      line-height: 1;
+      display: flex;
+      align-items: baseline;
+      gap: 0.3rem;
+    }
+
+    .kpi-sub {
+      font-size: 0.75rem;
+      color: var(--text-tertiary);
+      margin-top: 0.3rem;
+      font-weight: 600;
+    }
+
+    .kpi-icon-wrap {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+    }
+
+    /* Mobile Segmented Navigation Tabs */
+    .mobile-tab-nav {
+      display: none;
+      position: sticky;
+      top: 54px;
+      z-index: 55;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-default);
+      padding: 0.4rem 0.5rem;
+      margin-bottom: 0.85rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .mobile-tab-nav::-webkit-scrollbar { display: none; }
+
+    .mobile-tab-btn {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      padding: 0.5rem 0.75rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      white-space: nowrap;
+      transition: all 0.15s;
+    }
+
+    .mobile-tab-btn.active {
+      background: var(--bg-card);
+      color: var(--cyan);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+
+    /* 3-Column Studio Workspace */
+    .workspace-grid {
+      display: grid;
+      grid-template-columns: 330px 1fr 310px;
+      gap: 1.15rem;
+      align-items: start;
+    }
+
+    /* Panel Cards */
+    .panel {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin-bottom: 1.15rem;
+    }
+
+    .panel-header {
+      padding: 0.75rem 1rem;
+      background: rgba(17, 23, 38, 0.7);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .panel-title {
+      font-size: 0.9rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .panel-body {
+      padding: 1rem;
+    }
+
+    /* Search & Filter Bar */
+    .filter-bar-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .search-input-wrap {
+      position: relative;
+      flex: 1;
+    }
+
+    .search-input-wrap i {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-tertiary);
+      font-size: 0.8rem;
+    }
+
+    .search-input {
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border-default);
+      color: var(--text-primary);
+      padding: 0.45rem 2rem 0.45rem 0.75rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .search-input:focus {
+      border-color: var(--cyan);
+      box-shadow: 0 0 0 2px var(--cyan-glow);
+    }
+
+    /* Category Accordion */
+    .cat-accordion {
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-md);
+      margin-bottom: 0.75rem;
+      overflow: hidden;
+      background: var(--bg-card);
+      transition: border-color 0.2s;
+    }
+
+    .cat-accordion:hover {
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+
+    .cat-header {
+      padding: 0.7rem 0.9rem;
+      background: rgba(26, 36, 58, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+      gap: 0.5rem;
+      transition: background 0.15s;
+    }
+    .cat-header:hover {
+      background: rgba(26, 36, 58, 0.75);
+    }
+
+    .cat-info {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .cat-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .cat-badge {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: var(--radius-xs);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-subtle);
+      flex-shrink: 0;
+    }
+
+    .cat-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .btn-icon {
+      background: transparent;
+      border: none;
+      color: var(--text-tertiary);
+      cursor: pointer;
+      font-size: 0.82rem;
+      width: 28px;
+      height: 28px;
+      border-radius: var(--radius-xs);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+    }
+    .btn-icon:hover {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .btn-icon.danger:hover {
+      color: var(--rose);
+      background: rgba(244, 63, 94, 0.15);
+    }
+
+    .cat-body {
+      padding: 0.75rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 0.45rem;
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .cat-body.collapsed {
+      display: none;
+    }
+
+    /* Individual Task Chip */
+    .task-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 0.5rem 0.7rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.55rem;
+      cursor: pointer;
+      transition: transform 0.15s var(--ease-spring), border-color 0.15s, background 0.15s;
+      position: relative;
+    }
+
+    .task-card:hover {
+      border-color: var(--border-focused);
+      background: var(--bg-card-hover);
+      transform: translateY(-1px);
+    }
+
+    .task-card.done {
+      background: rgba(16, 185, 129, 0.08);
+      border-color: rgba(16, 185, 129, 0.35);
+    }
+
+    .task-main {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      overflow: hidden;
+      flex: 1;
+    }
+
+    .task-check {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      border: 2px solid var(--border-default);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.68rem;
+      flex-shrink: 0;
+      transition: all 0.15s var(--ease-spring);
+    }
+
+    .task-card.done .task-check {
+      background: var(--emerald);
+      border-color: var(--emerald);
+      color: #06080d;
+      transform: scale(1.05);
+    }
+
+    .task-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: color 0.15s;
+    }
+
+    .task-card.done .task-label {
+      text-decoration: line-through;
+      color: var(--text-tertiary);
+    }
+
+    .task-tool-strip {
+      display: flex;
+      align-items: center;
+      gap: 0.15rem;
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+
+    .task-card:hover .task-tool-strip {
+      opacity: 1;
+    }
+
+    /* Schedule Timeline */
+    .timeline-node {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-right: 3px solid var(--cyan);
+      border-radius: var(--radius-sm);
+      padding: 0.6rem 0.8rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      transition: all 0.15s;
+    }
+
+    .timeline-node:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--cyan);
+    }
+
+    .timeline-node.attended {
+      border-right-color: var(--emerald);
+      opacity: 0.7;
+    }
+
+    .timeline-node.attended h5 {
+      text-decoration: line-through;
+    }
+
+    .timeline-details h5 {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .timeline-details p {
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+      margin-top: 2px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .node-badge {
+      font-size: 0.68rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(56, 189, 248, 0.1);
+      color: var(--cyan);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    /* Water Tracker Widget */
+    .water-tracker-card {
+      background: linear-gradient(180deg, rgba(56, 189, 248, 0.05) 0%, transparent 100%);
+      border: 1px solid rgba(56, 189, 248, 0.15);
+      border-radius: var(--radius-md);
+      padding: 0.85rem;
+    }
+
+    .water-stat-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 0.45rem;
+    }
+
+    .water-bar-track {
+      height: 8px;
+      border-radius: 99px;
+      background: rgba(255, 255, 255, 0.07);
+      overflow: hidden;
+      margin-bottom: 0.7rem;
+    }
+
+    .water-bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: linear-gradient(90deg, #0284c7, var(--cyan));
+      transition: width 0.3s var(--ease-spring);
+    }
+
+    .water-actions-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr) 36px;
+      gap: 0.3rem;
+    }
+
+    .btn-water {
+      background: var(--bg-card);
+      border: 1px solid var(--border-default);
+      color: var(--text-secondary);
+      padding: 0.35rem 0.2rem;
+      border-radius: var(--radius-xs);
+      font-size: 0.72rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s;
+    }
+    .btn-water:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+      background: rgba(56, 189, 248, 0.08);
+    }
+
+    /* Pomodoro / Focus Timer Widget */
+    .timer-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-md);
+      padding: 0.85rem;
+      text-align: center;
+    }
+
+    .timer-display {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--cyan);
+      letter-spacing: 2px;
+      margin: 0.3rem 0;
+      text-shadow: 0 0 16px var(--cyan-glow);
+    }
+
+    /* Priorities List */
+    .priority-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding: 0.5rem 0.7rem;
+      background: var(--bg-card);
+      border-radius: var(--radius-xs);
+      border: 1px solid var(--border-subtle);
+      margin-bottom: 0.4rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    /* Modals System */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(3, 5, 9, 0.84);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 120;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      padding: 1rem;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-sheet {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 480px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+      overflow: hidden;
+      transform: translateY(20px) scale(0.98);
+      transition: transform 0.2s var(--ease-spring);
+    }
+
+    .modal-overlay.active .modal-sheet {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-head {
+      padding: 0.85rem 1.15rem;
+      background: rgba(17, 23, 38, 0.85);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-content-area {
+      padding: 1.15rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .form-field label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      margin-bottom: 0.3rem;
+    }
+
+    .text-box, .select-box {
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border-default);
+      color: var(--text-primary);
+      padding: 0.5rem 0.8rem;
+      border-radius: var(--radius-xs);
+      font-size: 0.85rem;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .text-box:focus, .select-box:focus {
+      border-color: var(--cyan);
+      box-shadow: 0 0 0 2px var(--cyan-glow);
+    }
+
+    .modal-foot {
+      padding: 0.75rem 1.15rem;
+      background: rgba(17, 23, 38, 0.85);
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.45rem;
+    }
+
+    /* Mood selector */
+    .mood-strip {
+      display: flex;
+      gap: 0.4rem;
+      margin-top: 0.35rem;
+    }
+    .mood-btn {
+      flex: 1;
+      padding: 0.4rem;
+      border-radius: var(--radius-xs);
+      background: var(--bg-card);
+      border: 1px solid var(--border-default);
+      cursor: pointer;
+      font-size: 1rem;
+      text-align: center;
+      transition: all 0.15s;
+    }
+    .mood-btn.selected {
+      border-color: var(--amber);
+      background: rgba(245, 158, 11, 0.12);
+      transform: scale(1.05);
+    }
+
+    /* Quick Action Sheet on Mobile */
+    .mobile-action-sheet {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border-default);
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      padding: 1.25rem;
+      z-index: 130;
+      transform: translateY(100%);
+      transition: transform 0.25s var(--ease-spring);
+      box-shadow: 0 -10px 40px rgba(0,0,0,0.7);
+    }
+
+    .mobile-action-sheet.active {
+      transform: translateY(0);
+    }
+
+    .sheet-handle {
+      width: 40px;
+      height: 4px;
+      background: var(--border-default);
+      border-radius: 99px;
+      margin: 0 auto 1rem auto;
+    }
+
+    .sheet-options-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.65rem;
+    }
+
+    .sheet-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-default);
+      color: var(--text-primary);
+      padding: 0.75rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 700;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      cursor: pointer;
+    }
+    .sheet-btn i { font-size: 1.2rem; }
+    .sheet-btn.primary { border-color: var(--cyan); color: var(--cyan); background: rgba(56, 189, 248, 0.08); }
+    .sheet-btn.emerald { border-color: var(--emerald); color: var(--emerald); background: rgba(16, 185, 129, 0.08); }
+    .sheet-btn.danger { border-color: var(--rose); color: var(--rose); background: rgba(244, 63, 94, 0.08); }
+
+    /* ========================================================
+       RESPONSIVE SYSTEM & MOBILE FIRST OVERRIDES (< 860px)
+       ======================================================== */
+    @media (max-width: 1240px) {
+      .workspace-grid {
+        grid-template-columns: 300px 1fr;
       }
+      .col-extras {
+        grid-column: 1 / -1;
+      }
+    }
 
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        font-family:
-          "Cairo",
-          -apple-system,
-          BlinkMacSystemFont,
-          sans-serif;
-        -webkit-font-smoothing: antialiased;
-      }
-
-      body {
-        background-color: var(--bg-base);
-        color: var(--text-primary);
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        overflow-x: hidden;
-        background-image:
-          radial-gradient(
-            circle at 15% 10%,
-            rgba(56, 189, 248, 0.05) 0%,
-            transparent 40%
-          ),
-          radial-gradient(
-            circle at 85% 60%,
-            rgba(99, 102, 241, 0.04) 0%,
-            transparent 45%
-          );
-        background-attachment: fixed;
-      }
-
-      /* Custom Scrollbar */
-      ::-webkit-scrollbar {
-        width: 6px;
-        height: 6px;
-      }
-      ::-webkit-scrollbar-track {
-        background: var(--bg-base);
-      }
-      ::-webkit-scrollbar-thumb {
-        background: var(--border-default);
-        border-radius: var(--radius-full);
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: var(--cyan);
-      }
-
-      /* Top Sticky Navbar */
+    @media (max-width: 860px) {
+      /* Header on mobile becomes super slim (52px height) */
       header {
-        background: rgba(13, 18, 29, 0.85);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        border-bottom: 1px solid var(--border-subtle);
-        position: sticky;
-        top: 0;
-        z-index: 50;
-        padding: 0.75rem 1.5rem;
+        padding: 0.5rem 0.85rem;
       }
 
       .header-inner {
-        max-width: 1480px;
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-        flex-wrap: wrap;
-      }
-
-      .brand-group {
-        display: flex;
-        align-items: center;
-        gap: 0.85rem;
-      }
-
-      .pulse-indicator {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        background: var(--emerald);
-        box-shadow: 0 0 12px var(--emerald);
-        position: relative;
-      }
-
-      .pulse-indicator::after {
-        content: "";
-        position: absolute;
-        inset: -4px;
-        border-radius: 50%;
-        border: 1px solid var(--emerald);
-        animation: pulseAnim 2s infinite;
-        opacity: 0.75;
-      }
-
-      @keyframes pulseAnim {
-        0% {
-          transform: scale(0.9);
-          opacity: 0.8;
-        }
-        50% {
-          transform: scale(1.6);
-          opacity: 0;
-        }
-        100% {
-          transform: scale(0.9);
-          opacity: 0;
-        }
+        flex-wrap: nowrap;
       }
 
       .brand-title {
-        font-size: 1.2rem;
-        font-weight: 800;
-        letter-spacing: -0.3px;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
+        font-size: 0.95rem;
       }
-
       .brand-tag {
-        font-family: "Plus Jakarta Sans", sans-serif;
-        font-size: 0.75rem;
-        font-weight: 700;
-        color: var(--cyan);
-        background: rgba(56, 189, 248, 0.1);
-        border: 1px solid rgba(56, 189, 248, 0.25);
-        padding: 2px 8px;
-        border-radius: var(--radius-sm);
-      }
-
-      .header-actions {
-        display: flex;
-        align-items: center;
-        gap: 0.6rem;
-        flex-wrap: wrap;
-      }
-
-      /* Buttons System */
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.45rem;
-        padding: 0.5rem 0.95rem;
-        border-radius: var(--radius-sm);
-        font-size: 0.84rem;
-        font-weight: 700;
-        cursor: pointer;
-        border: 1px solid transparent;
-        transition:
-          transform 0.15s var(--ease-spring),
-          background 0.15s,
-          border-color 0.15s,
-          box-shadow 0.15s;
-        user-select: none;
-        text-decoration: none;
-        white-space: nowrap;
-      }
-
-      .btn:active {
-        transform: scale(0.97);
-      }
-
-      .btn-primary {
-        background: linear-gradient(135deg, #0284c7, var(--cyan));
-        color: #07090e;
-        box-shadow: 0 4px 14px var(--cyan-glow);
-      }
-      .btn-primary:hover {
-        box-shadow: 0 6px 20px var(--cyan-glow);
-        filter: brightness(1.08);
-      }
-
-      .btn-ghost {
-        background: var(--bg-card);
-        color: var(--text-primary);
-        border-color: var(--border-default);
-      }
-      .btn-ghost:hover {
-        background: var(--bg-card-hover);
-        border-color: var(--cyan);
-      }
-
-      .btn-emerald {
-        background: rgba(16, 185, 129, 0.12);
-        color: var(--emerald);
-        border-color: rgba(16, 185, 129, 0.3);
-      }
-      .btn-emerald:hover {
-        background: var(--emerald);
-        color: #07090e;
-        box-shadow: 0 0 16px var(--emerald-glow);
-      }
-
-      .btn-danger {
-        background: rgba(244, 63, 94, 0.1);
-        color: var(--rose);
-        border-color: rgba(244, 63, 94, 0.25);
-      }
-      .btn-danger:hover {
-        background: var(--rose);
-        color: #fff;
-        box-shadow: 0 0 14px var(--rose-glow);
-      }
-
-      /* Main Container */
-      main {
-        max-width: 1480px;
-        width: 100%;
-        margin: 1.25rem auto;
-        padding: 0 1.25rem 3rem 1.25rem;
-        flex: 1;
-      }
-
-      /* Date Bar Strip */
-      .date-command-bar {
-        background: var(--bg-surface);
-        border: 1px solid var(--border-default);
-        border-radius: var(--radius-md);
-        padding: 0.85rem 1.2rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-        margin-bottom: 1.25rem;
-        flex-wrap: wrap;
-      }
-
-      .date-nav-group {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        flex-wrap: wrap;
-      }
-
-      .day-pill-strip {
-        display: flex;
-        align-items: center;
-        gap: 0.4rem;
-        overflow-x: auto;
-        padding-bottom: 2px;
-        scrollbar-width: none;
-      }
-      .day-pill-strip::-webkit-scrollbar {
         display: none;
       }
 
-      .day-pill {
-        background: var(--bg-card);
-        border: 1px solid var(--border-subtle);
-        color: var(--text-secondary);
-        padding: 0.4rem 0.85rem;
+      /* Hide bulky desktop header buttons on mobile */
+      .desktop-only-btn {
+        display: none !important;
+      }
+
+      /* Show mobile trigger buttons */
+      .mobile-menu-trigger {
+        display: inline-flex;
+      }
+
+      /* WhatsApp icon button on mobile */
+      .btn-wa-mobile {
+        width: 34px;
+        height: 34px;
         border-radius: var(--radius-sm);
-        font-size: 0.82rem;
-        font-weight: 700;
-        cursor: pointer;
-        display: flex;
+        display: inline-flex;
         align-items: center;
-        gap: 0.35rem;
-        transition: all 0.15s;
-        white-space: nowrap;
+        justify-content: center;
+        background: rgba(37, 211, 102, 0.15);
+        color: #25d366;
+        border: 1px solid rgba(37, 211, 102, 0.35);
+        text-decoration: none;
+        font-size: 1.05rem;
       }
 
-      .day-pill:hover {
-        border-color: var(--cyan);
-        color: var(--text-primary);
+      /* Mobile Segmented Navigation Tabs */
+      .mobile-tab-nav {
+        display: flex;
       }
 
-      .day-pill.active {
-        background: rgba(56, 189, 248, 0.12);
-        border-color: var(--cyan);
-        color: var(--cyan);
-        box-shadow: 0 0 12px var(--cyan-glow);
+      /* Layout collapses to 1 column controlled by tabs */
+      .workspace-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
       }
 
-      .day-pill .dot {
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: var(--text-tertiary);
-      }
-      .day-pill.active .dot {
-        background: var(--cyan);
+      .workspace-col {
+        display: none;
       }
 
-      /* KPI Summary Matrix */
+      .workspace-col.active-mobile-col {
+        display: block;
+      }
+
       .kpi-matrix {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 1rem;
-        margin-bottom: 1.25rem;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
       }
 
       .kpi-box {
-        background: var(--bg-surface);
-        border: 1px solid var(--border-default);
-        border-radius: var(--radius-md);
-        padding: 1.1rem 1.25rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        position: relative;
-        overflow: hidden;
-        transition:
-          transform 0.2s var(--ease-spring),
-          border-color 0.2s;
-      }
-
-      .kpi-box:hover {
-        transform: translateY(-2px);
-        border-color: var(--border-focused);
-      }
-
-      .kpi-box::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        width: 3px;
-        background: var(--cyan);
-      }
-      .kpi-box.emerald::before {
-        background: var(--emerald);
-      }
-      .kpi-box.amber::before {
-        background: var(--amber);
-      }
-      .kpi-box.indigo::before {
-        background: var(--indigo);
-      }
-
-      .kpi-content h4 {
-        font-size: 0.82rem;
-        font-weight: 700;
-        color: var(--text-secondary);
-        margin-bottom: 0.35rem;
+        padding: 0.75rem 0.85rem;
       }
 
       .kpi-metric {
-        font-size: 1.7rem;
-        font-weight: 800;
-        font-family: "Plus Jakarta Sans", sans-serif;
-        line-height: 1;
-        display: flex;
-        align-items: baseline;
-        gap: 0.35rem;
+        font-size: 1.35rem;
       }
-
-      .kpi-sub {
-        font-size: 0.78rem;
-        color: var(--text-tertiary);
-        margin-top: 0.3rem;
-        font-weight: 600;
-      }
-
       .kpi-icon-wrap {
-        width: 44px;
-        height: 44px;
-        border-radius: var(--radius-sm);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.4rem;
-        background: var(--bg-card);
-        border: 1px solid var(--border-subtle);
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
       }
 
-      /* Core Dynamic Workspace Grid (3-Col Studio Layout) */
-      .workspace-grid {
-        display: grid;
-        grid-template-columns: 340px 1fr 310px;
-        gap: 1.25rem;
-        align-items: start;
+      .date-command-bar {
+        padding: 0.55rem 0.75rem;
       }
 
-      @media (max-width: 1240px) {
-        .workspace-grid {
-          grid-template-columns: 320px 1fr;
-        }
-        .col-extras {
-          grid-column: 1 / -1;
-        }
-      }
-
-      @media (max-width: 900px) {
-        .workspace-grid {
-          grid-template-columns: 1fr;
-        }
-      }
-
-      /* Card Panels */
-      .panel {
-        background: var(--bg-surface);
-        border: 1px solid var(--border-default);
-        border-radius: var(--radius-md);
-        overflow: hidden;
-        margin-bottom: 1.25rem;
-      }
-
-      .panel-header {
-        padding: 0.85rem 1.1rem;
-        background: rgba(18, 25, 41, 0.65);
-        border-bottom: 1px solid var(--border-subtle);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 0.6rem;
-      }
-
-      .panel-title {
-        font-size: 0.94rem;
-        font-weight: 800;
-        display: flex;
-        align-items: center;
-        gap: 0.45rem;
-      }
-
-      .panel-body {
-        padding: 1.1rem;
-      }
-
-      /* Quick Search / Filter Bar */
-      .filter-bar-wrap {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        margin-bottom: 1rem;
-      }
-
-      .search-input {
-        flex: 1;
-        background: var(--bg-card);
-        border: 1px solid var(--border-default);
-        color: var(--text-primary);
-        padding: 0.5rem 0.85rem;
-        border-radius: var(--radius-sm);
-        font-size: 0.84rem;
-        outline: none;
-        transition: border-color 0.15s;
-      }
-      .search-input:focus {
-        border-color: var(--cyan);
-        box-shadow: 0 0 0 2px var(--cyan-glow);
-      }
-
-      /* Categories & Tasks Accordion */
-      .cat-accordion {
-        border: 1px solid var(--border-default);
-        border-radius: var(--radius-md);
-        margin-bottom: 0.85rem;
-        overflow: hidden;
-        background: var(--bg-card);
-        transition: border-color 0.2s;
-      }
-
-      .cat-accordion:hover {
-        border-color: rgba(56, 189, 248, 0.35);
-      }
-
-      .cat-header {
-        padding: 0.75rem 1rem;
-        background: rgba(26, 37, 60, 0.4);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        cursor: pointer;
-        user-select: none;
-        gap: 0.6rem;
-        transition: background 0.15s;
-      }
-      .cat-header:hover {
-        background: rgba(26, 37, 60, 0.7);
-      }
-
-      .cat-info {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-      }
-
-      .cat-title {
-        font-size: 0.92rem;
-        font-weight: 800;
-        color: var(--text-primary);
-      }
-
-      .cat-badge {
-        font-family: "Plus Jakarta Sans", sans-serif;
-        font-size: 0.75rem;
-        font-weight: 700;
-        padding: 2px 7px;
-        border-radius: var(--radius-sm);
-        background: rgba(255, 255, 255, 0.05);
-        color: var(--text-secondary);
-        border: 1px solid var(--border-subtle);
-      }
-
-      .cat-actions {
-        display: flex;
-        align-items: center;
-        gap: 0.35rem;
-      }
-
-      .btn-icon {
-        background: transparent;
-        border: none;
-        color: var(--text-tertiary);
-        cursor: pointer;
-        font-size: 0.85rem;
-        width: 28px;
-        height: 28px;
-        border-radius: var(--radius-sm);
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.15s;
-      }
-      .btn-icon:hover {
-        color: var(--text-primary);
-        background: rgba(255, 255, 255, 0.08);
-      }
-      .btn-icon.danger:hover {
-        color: var(--rose);
-        background: rgba(244, 63, 94, 0.15);
+      /* Always show task tool buttons on mobile chips without hover */
+      .task-tool-strip {
+        opacity: 0.8;
       }
 
       .cat-body {
-        padding: 0.85rem;
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-        gap: 0.5rem;
-        background: var(--bg-surface);
-        border-top: 1px solid var(--border-subtle);
+        grid-template-columns: 1fr;
       }
+    }
+  </style>
+</head>
+<body>
 
-      .cat-body.collapsed {
-        display: none;
-      }
-
-      /* Individual Task Chip */
-      .task-card {
-        background: var(--bg-card);
-        border: 1px solid var(--border-subtle);
-        border-radius: var(--radius-sm);
-        padding: 0.55rem 0.75rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 0.6rem;
-        cursor: pointer;
-        transition:
-          transform 0.15s var(--ease-spring),
-          border-color 0.15s,
-          background 0.15s;
-        position: relative;
-      }
-
-      .task-card:hover {
-        border-color: var(--border-focused);
-        background: var(--bg-card-hover);
-        transform: translateY(-1px);
-      }
-
-      .task-card.done {
-        background: rgba(16, 185, 129, 0.08);
-        border-color: rgba(16, 185, 129, 0.35);
-      }
-
-      .task-main {
-        display: flex;
-        align-items: center;
-        gap: 0.65rem;
-        overflow: hidden;
-        flex: 1;
-      }
-
-      .task-check {
-        width: 19px;
-        height: 19px;
-        border-radius: 5px;
-        border: 2px solid var(--border-default);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.72rem;
-        flex-shrink: 0;
-        transition: all 0.15s var(--ease-spring);
-      }
-
-      .task-card.done .task-check {
-        background: var(--emerald);
-        border-color: var(--emerald);
-        color: #07090e;
-        transform: scale(1.05);
-      }
-
-      .task-label {
-        font-size: 0.84rem;
-        font-weight: 700;
-        color: var(--text-primary);
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        transition: color 0.15s;
-      }
-
-      .task-card.done .task-label {
-        text-decoration: line-through;
-        color: var(--text-tertiary);
-      }
-
-      .task-tool-strip {
-        display: flex;
-        align-items: center;
-        gap: 0.2rem;
-        opacity: 0;
-        transition: opacity 0.15s;
-      }
-
-      .task-card:hover .task-tool-strip {
-        opacity: 1;
-      }
-
-      /* Timetable Timeline */
-      .timeline-node {
-        background: var(--bg-card);
-        border: 1px solid var(--border-subtle);
-        border-right: 3px solid var(--cyan);
-        border-radius: var(--radius-sm);
-        padding: 0.65rem 0.85rem;
-        margin-bottom: 0.55rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 0.5rem;
-        transition: all 0.15s;
-      }
-
-      .timeline-node:hover {
-        background: var(--bg-card-hover);
-        border-color: var(--cyan);
-      }
-
-      .timeline-node.attended {
-        border-right-color: var(--emerald);
-        opacity: 0.7;
-      }
-
-      .timeline-node.attended h5 {
-        text-decoration: line-through;
-      }
-
-      .timeline-details h5 {
-        font-size: 0.88rem;
-        font-weight: 800;
-        color: var(--text-primary);
-      }
-
-      .timeline-details p {
-        font-size: 0.75rem;
-        color: var(--text-secondary);
-        margin-top: 2px;
-        font-family: "JetBrains Mono", monospace;
-      }
-
-      .node-badge {
-        font-size: 0.7rem;
-        padding: 2px 7px;
-        border-radius: 4px;
-        background: rgba(56, 189, 248, 0.1);
-        color: var(--cyan);
-        font-weight: 700;
-        white-space: nowrap;
-      }
-
-      /* Water Cylinder / Widget */
-      .water-tracker-card {
-        background: linear-gradient(
-          180deg,
-          rgba(56, 189, 248, 0.05) 0%,
-          transparent 100%
-        );
-        border: 1px solid rgba(56, 189, 248, 0.15);
-        border-radius: var(--radius-md);
-        padding: 1rem;
-      }
-
-      .water-stat-row {
-        display: flex;
-        align-items: baseline;
-        justify-content: space-between;
-        margin-bottom: 0.5rem;
-      }
-
-      .water-bar-track {
-        height: 10px;
-        border-radius: 99px;
-        background: rgba(255, 255, 255, 0.07);
-        overflow: hidden;
-        margin-bottom: 0.75rem;
-      }
-
-      .water-bar-fill {
-        height: 100%;
-        border-radius: 99px;
-        background: linear-gradient(90deg, #0284c7, var(--cyan));
-        transition: width 0.3s var(--ease-spring);
-      }
-
-      .water-actions-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr) 40px;
-        gap: 0.35rem;
-      }
-
-      .btn-water {
-        background: var(--bg-card);
-        border: 1px solid var(--border-default);
-        color: var(--text-secondary);
-        padding: 0.35rem;
-        border-radius: var(--radius-sm);
-        font-size: 0.75rem;
-        font-weight: 700;
-        cursor: pointer;
-        text-align: center;
-        transition: all 0.15s;
-      }
-      .btn-water:hover {
-        border-color: var(--cyan);
-        color: var(--cyan);
-        background: rgba(56, 189, 248, 0.08);
-      }
-
-      /* Pomodoro / Focus Timer Widget */
-      .timer-card {
-        background: var(--bg-surface);
-        border: 1px solid var(--border-default);
-        border-radius: var(--radius-md);
-        padding: 1rem;
-        text-align: center;
-      }
-
-      .timer-display {
-        font-family: "JetBrains Mono", monospace;
-        font-size: 2.2rem;
-        font-weight: 800;
-        color: var(--cyan);
-        letter-spacing: 2px;
-        margin: 0.4rem 0;
-        text-shadow: 0 0 20px var(--cyan-glow);
-      }
-
-      /* Priorities List */
-      .priority-item {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 0.5rem;
-        padding: 0.55rem 0.75rem;
-        background: var(--bg-card);
-        border-radius: var(--radius-sm);
-        border: 1px solid var(--border-subtle);
-        margin-bottom: 0.45rem;
-        font-size: 0.83rem;
-        font-weight: 700;
-      }
-
-      /* Modal Framework */
-      .modal-overlay {
-        position: fixed;
-        inset: 0;
-        background: rgba(4, 6, 11, 0.82);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 100;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.2s ease;
-        padding: 1rem;
-      }
-
-      .modal-overlay.active {
-        opacity: 1;
-        pointer-events: auto;
-      }
-
-      .modal-sheet {
-        background: var(--bg-surface);
-        border: 1px solid var(--border-default);
-        border-radius: var(--radius-lg);
-        width: 100%;
-        max-width: 500px;
-        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
-        overflow: hidden;
-        transform: translateY(20px) scale(0.98);
-        transition: transform 0.2s var(--ease-spring);
-      }
-
-      .modal-overlay.active .modal-sheet {
-        transform: translateY(0) scale(1);
-      }
-
-      .modal-head {
-        padding: 1rem 1.25rem;
-        background: rgba(18, 25, 41, 0.85);
-        border-bottom: 1px solid var(--border-subtle);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-
-      .modal-content-area {
-        padding: 1.25rem;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-      }
-
-      .form-field label {
-        display: block;
-        font-size: 0.82rem;
-        font-weight: 700;
-        color: var(--text-secondary);
-        margin-bottom: 0.35rem;
-      }
-
-      .text-box,
-      .select-box {
-        width: 100%;
-        background: var(--bg-card);
-        border: 1px solid var(--border-default);
-        color: var(--text-primary);
-        padding: 0.55rem 0.85rem;
-        border-radius: var(--radius-sm);
-        font-size: 0.88rem;
-        outline: none;
-        transition: border-color 0.15s;
-      }
-      .text-box:focus,
-      .select-box:focus {
-        border-color: var(--cyan);
-        box-shadow: 0 0 0 2px var(--cyan-glow);
-      }
-
-      .modal-foot {
-        padding: 0.85rem 1.25rem;
-        background: rgba(18, 25, 41, 0.85);
-        border-top: 1px solid var(--border-subtle);
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        gap: 0.5rem;
-      }
-
-      /* Mood selector */
-      .mood-strip {
-        display: flex;
-        gap: 0.5rem;
-        margin-top: 0.4rem;
-      }
-      .mood-btn {
-        flex: 1;
-        padding: 0.45rem;
-        border-radius: var(--radius-sm);
-        background: var(--bg-card);
-        border: 1px solid var(--border-default);
-        cursor: pointer;
-        font-size: 1.1rem;
-        text-align: center;
-        transition: all 0.15s;
-      }
-      .mood-btn.selected {
-        border-color: var(--amber);
-        background: rgba(245, 158, 11, 0.12);
-        transform: scale(1.05);
-      }
-    </style>
-  </head>
-  <body>
-    <!-- Top Navigation Header -->
-    <header>
-      <div class="header-inner">
-        <div class="brand-group">
-          <div class="pulse-indicator"></div>
-          <div class="brand-title">
-            مركز العمليات اليومية <span class="brand-tag">KAREEM FARG</span>
-          </div>
-        </div>
-
-        <div class="header-actions">
-          <!-- Direct Smart WhatsApp Dispatcher -->
-          <a
-            id="smartWhatsAppBtn"
-            href="#"
-            target="_blank"
-            class="btn btn-emerald"
-            title="تجهيز وإرسال ملخص اليوم عبر واتساب"
-          >
-            💬 تذكير واتساب (01095622134)
-          </a>
-
-          <!-- Category & Task Management Triggers -->
-          <button class="btn btn-ghost" onclick="openAddCategoryModal()">
-            + قسم جديد
-          </button>
-          <button class="btn btn-primary" onclick="openAddTaskModal()">
-            + مهمة جديدة
-          </button>
-
-          <!-- Data & Backup Tools -->
-          <button
-            class="btn btn-ghost"
-            onclick="exportDataBackup()"
-            title="تنزيل نسخة احتياطية من كل بياناتك"
-          >
-            💾 نسخ احتياطي
-          </button>
-          <button
-            class="btn btn-danger"
-            onclick="confirmResetActiveDay()"
-            title="تصفير علامات إنجاز اليوم المختار"
-          >
-            🔄 تصفير اليوم
-          </button>
-        </div>
-      </div>
-    </header>
-
-    <!-- Main View -->
-    <main>
-      <!-- Date Command Bar & Switcher -->
-      <div class="date-command-bar">
-        <div class="date-nav-group">
-          <button
-            class="btn btn-ghost"
-            style="padding: 0.4rem 0.65rem"
-            onclick="stepDay(-1)"
-            title="اليوم السابق"
-          >
-            ◀
-          </button>
-          <button
-            class="btn btn-primary"
-            style="padding: 0.4rem 0.85rem; font-size: 0.8rem"
-            onclick="goToToday()"
-          >
-            اليوم الحالي
-          </button>
-          <button
-            class="btn btn-ghost"
-            style="padding: 0.4rem 0.65rem"
-            onclick="stepDay(1)"
-            title="اليوم التالي"
-          >
-            ▶
-          </button>
-
-          <input
-            type="date"
-            id="calendarPicker"
-            class="text-box"
-            style="width: 140px; padding: 0.35rem 0.65rem; font-size: 0.8rem"
-            onchange="selectSpecificDate(this.value)"
-          />
-        </div>
-
-        <!-- Quick 7-Day Pill Strip -->
-        <div class="day-pill-strip" id="weekPillStrip">
-          <!-- Rendered Dynamically -->
+  <!-- Top Sticky App Bar (Compact & Sleek) -->
+  <header>
+    <div class="header-inner">
+      <div class="brand-group">
+        <div class="pulse-indicator"></div>
+        <div class="brand-title">
+          مركز العمليات <span class="brand-tag">KAREEM FARG</span>
         </div>
       </div>
 
-      <!-- KPI Summary Matrix -->
-      <div class="kpi-matrix">
-        <div class="kpi-box emerald">
-          <div class="kpi-content">
-            <h4>نسبة الإنجاز اليومي</h4>
-            <div class="kpi-metric" id="kpiPercent">0%</div>
-            <div class="kpi-sub" id="kpiTaskRatio">0 من 0 مكتمل</div>
-          </div>
-          <div class="kpi-icon-wrap" style="color: var(--emerald)">🎯</div>
-        </div>
+      <div class="header-actions">
+        <!-- Direct Smart WhatsApp Button (Full on Desktop, Icon on Mobile) -->
+        <a id="smartWhatsAppBtn" href="#" target="_blank" class="btn btn-emerald desktop-only-btn" title="تجهيز وإرسال ملخص اليوم عبر واتساب">
+          <i class="fa-brands fa-whatsapp"></i> تذكير واتساب (01095622134)
+        </a>
 
-        <div class="kpi-box">
-          <div class="kpi-content">
-            <h4>السكاشن والالتزامات</h4>
-            <div class="kpi-metric" id="kpiEventsCount">0</div>
-            <div class="kpi-sub" id="kpiEventsStatus">
-              لا توجد محاضرات متبقية
-            </div>
-          </div>
-          <div class="kpi-icon-wrap" style="color: var(--cyan)">🎓</div>
-        </div>
+        <!-- Mobile WhatsApp Quick Icon -->
+        <a id="mobileWaBtn" href="#" target="_blank" class="btn-wa-mobile" title="واتساب">
+          <i class="fa-brands fa-whatsapp"></i>
+        </a>
 
-        <div class="kpi-box indigo">
-          <div class="kpi-content">
-            <h4>استهلاك الماء</h4>
-            <div class="kpi-metric">
-              <span id="kpiWaterLiters">0</span>
-              <span style="font-size: 0.9rem; color: var(--text-tertiary)"
-                >/ 3 لتر</span
-              >
-            </div>
-            <div class="kpi-sub" id="kpiWaterPct">0% من الهدف</div>
-          </div>
-          <div class="kpi-icon-wrap" style="color: var(--indigo)">💧</div>
-        </div>
+        <!-- Desktop Quick Actions -->
+        <button class="btn btn-ghost desktop-only-btn" onclick="openAddCategoryModal()"><i class="fa-solid fa-folder-plus"></i> قسم جديد</button>
+        <button class="btn btn-primary desktop-only-btn" onclick="openAddTaskModal()"><i class="fa-solid fa-plus"></i> مهمة جديدة</button>
+        <button class="btn btn-ghost desktop-only-btn" onclick="exportDataBackup()" title="تنزيل نسخة احتياطية"><i class="fa-solid fa-floppy-disk"></i></button>
+        <button class="btn btn-danger desktop-only-btn" onclick="confirmResetActiveDay()" title="تصفير إنجاز اليوم المختار"><i class="fa-solid fa-rotate-right"></i> تصفير</button>
 
-        <div class="kpi-box amber">
-          <div class="kpi-content">
-            <h4>حالة اليوم والمزاج</h4>
-            <div
-              class="kpi-metric"
-              id="kpiMoodDisplay"
-              style="font-size: 1.4rem"
-            >
-              💪 جاهز
-            </div>
-            <div class="kpi-sub">تحديث المراجعة المسائية</div>
-          </div>
-          <div class="kpi-icon-wrap" style="color: var(--amber)">⚡</div>
-        </div>
+        <!-- Mobile Quick Menu Trigger Button -->
+        <button class="btn-icon-square mobile-menu-trigger" onclick="openActionSheet()" title="القائمة السريعة">
+          <i class="fa-solid fa-ellipsis-vertical"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Segmented Tab Navigation -->
+  <nav class="mobile-tab-nav" id="mobileTabNav">
+    <button class="mobile-tab-btn active" onclick="switchMobileTab('habits')">
+      <i class="fa-solid fa-list-check"></i> العادات والمهام
+    </button>
+    <button class="mobile-tab-btn" onclick="switchMobileTab('schedule')">
+      <i class="fa-solid fa-calendar-day"></i> الجدول والسكاشن
+    </button>
+    <button class="mobile-tab-btn" onclick="switchMobileTab('extras')">
+      <i class="fa-solid fa-bolt"></i> التركيز والصحة
+    </button>
+  </nav>
+
+  <!-- Main View -->
+  <main>
+
+    <!-- Date Command Bar & Switcher -->
+    <div class="date-command-bar">
+      <div class="date-nav-group">
+        <button class="btn-icon-square" style="width:32px; height:32px;" onclick="stepDay(-1)" title="اليوم السابق">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+        <button class="btn btn-primary" style="padding:0.32rem 0.75rem; font-size:0.78rem;" onclick="goToToday()">
+          اليوم
+        </button>
+        <button class="btn-icon-square" style="width:32px; height:32px;" onclick="stepDay(1)" title="اليوم التالي">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        
+        <input type="date" id="calendarPicker" class="text-box" style="width:130px; padding:0.25rem 0.5rem; font-size:0.78rem;" onchange="selectSpecificDate(this.value)">
       </div>
 
-      <!-- 3-Column Studio Workspace -->
-      <div class="workspace-grid">
-        <!-- COLUMN 1: Schedule & Timetable -->
-        <aside>
-          <div class="panel">
-            <div class="panel-header">
-              <div class="panel-title">📌 جدول وسكاشن اليوم</div>
-              <button
-                class="btn btn-ghost"
-                style="padding: 2px 8px; font-size: 0.75rem"
-                onclick="openAddEventModal()"
-              >
-                + موعد
-              </button>
-            </div>
-            <div class="panel-body">
-              <div id="scheduleTimelineContainer">
-                <!-- Rendered Dynamically -->
-              </div>
-            </div>
-          </div>
+      <!-- Quick 7-Day Pill Strip -->
+      <div class="day-pill-strip" id="weekPillStrip">
+        <!-- Rendered Dynamically -->
+      </div>
+    </div>
 
-          <!-- Top 3 Priorities -->
-          <div class="panel">
-            <div class="panel-header">
-              <div class="panel-title">⭐ أهم 3 أولويات</div>
-              <button
-                class="btn-icon"
-                onclick="openEditPrioritiesModal()"
-                title="تعديل الأولويات"
-              >
-                ✏️
-              </button>
-            </div>
-            <div class="panel-body" id="prioritiesContainer">
+    <!-- KPI Summary Matrix -->
+    <div class="kpi-matrix">
+      <div class="kpi-box emerald">
+        <div class="kpi-content">
+          <h4>نسبة الإنجاز</h4>
+          <div class="kpi-metric" id="kpiPercent">0%</div>
+          <div class="kpi-sub" id="kpiTaskRatio">0 من 0 مكتمل</div>
+        </div>
+        <div class="kpi-icon-wrap" style="color:var(--emerald);"><i class="fa-solid fa-bullseye"></i></div>
+      </div>
+
+      <div class="kpi-box">
+        <div class="kpi-content">
+          <h4>السكاشن والمواعيد</h4>
+          <div class="kpi-metric" id="kpiEventsCount">0</div>
+          <div class="kpi-sub" id="kpiEventsStatus">-</div>
+        </div>
+        <div class="kpi-icon-wrap" style="color:var(--cyan);"><i class="fa-solid fa-graduation-cap"></i></div>
+      </div>
+
+      <div class="kpi-box indigo">
+        <div class="kpi-content">
+          <h4>الماء (3L)</h4>
+          <div class="kpi-metric"><span id="kpiWaterLiters">0</span> <span style="font-size:0.85rem; color:var(--text-tertiary);">L</span></div>
+          <div class="kpi-sub" id="kpiWaterPct">0% من الهدف</div>
+        </div>
+        <div class="kpi-icon-wrap" style="color:var(--indigo);"><i class="fa-solid fa-droplet"></i></div>
+      </div>
+
+      <div class="kpi-box amber">
+        <div class="kpi-content">
+          <h4>الحالة والمزاج</h4>
+          <div class="kpi-metric" id="kpiMoodDisplay" style="font-size:1.3rem;">💪 جاهز</div>
+          <div class="kpi-sub">المراجعة اليومية</div>
+        </div>
+        <div class="kpi-icon-wrap" style="color:var(--amber);"><i class="fa-solid fa-bolt"></i></div>
+      </div>
+    </div>
+
+    <!-- 3-Column Studio Workspace -->
+    <div class="workspace-grid">
+      
+      <!-- COLUMN 1: Schedule & Timetable -->
+      <aside class="workspace-col" id="colSchedule">
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title"><i class="fa-solid fa-calendar-check" style="color:var(--cyan);"></i> جدول وسكاشن اليوم</div>
+            <button class="btn btn-ghost" style="padding:2px 8px; font-size:0.75rem;" onclick="openAddEventModal()"><i class="fa-solid fa-plus"></i> موعد</button>
+          </div>
+          <div class="panel-body">
+            <div id="scheduleTimelineContainer">
               <!-- Rendered Dynamically -->
             </div>
           </div>
+        </div>
 
-          <!-- Pomodoro / Focus Stopwatch -->
-          <div class="panel">
-            <div class="panel-header">
-              <div class="panel-title">⏱️ مؤقت التركيز والمذاكرة</div>
-              <span
-                id="timerModeLabel"
-                style="font-size: 0.75rem; color: var(--cyan); font-weight: 700"
-                >جلسة تركيز (25د)</span
-              >
-            </div>
-            <div class="panel-body">
-              <div class="timer-card">
-                <div class="timer-display" id="timerDisplay">25:00</div>
-                <div
-                  style="
-                    display: flex;
-                    justify-content: center;
-                    gap: 0.5rem;
-                    margin-top: 0.6rem;
-                  "
-                >
-                  <button
-                    class="btn btn-primary"
-                    id="timerStartBtn"
-                    onclick="toggleTimer()"
-                  >
-                    بدء الجلسة
-                  </button>
-                  <button class="btn btn-ghost" onclick="resetTimer()">
-                    إعادة ضبط
-                  </button>
-                </div>
-              </div>
-            </div>
+        <!-- Top 3 Priorities -->
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title"><i class="fa-solid fa-star" style="color:var(--amber);"></i> أهم 3 أولويات</div>
+            <button class="btn-icon" onclick="openEditPrioritiesModal()" title="تعديل الأولويات"><i class="fa-solid fa-pen"></i></button>
           </div>
-        </aside>
+          <div class="panel-body" id="prioritiesContainer">
+            <!-- Rendered Dynamically -->
+          </div>
+        </div>
 
-        <!-- COLUMN 2: Central Habits & Task Engine -->
-        <section>
-          <div class="panel">
-            <div class="panel-header">
-              <div class="panel-title">📋 منظومة العادات والمهام اليومية</div>
-              <div style="display: flex; align-items: center; gap: 0.4rem">
-                <button
-                  class="btn btn-ghost"
-                  style="padding: 2px 8px; font-size: 0.75rem"
-                  onclick="checkAllHabits(true)"
-                >
-                  إنجاز الكل
+        <!-- Pomodoro / Focus Stopwatch -->
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title"><i class="fa-solid fa-stopwatch" style="color:var(--cyan);"></i> مؤقت التركيز</div>
+            <span id="timerModeLabel" style="font-size:0.75rem; color:var(--cyan); font-weight:700;">جلسة 25د</span>
+          </div>
+          <div class="panel-body">
+            <div class="timer-card">
+              <div class="timer-display" id="timerDisplay">25:00</div>
+              <div style="display:flex; justify-content:center; gap:0.5rem; margin-top:0.6rem;">
+                <button class="btn btn-primary" id="timerStartBtn" onclick="toggleTimer()">
+                  <i class="fa-solid fa-play"></i> بدء الجلسة
                 </button>
-                <button
-                  class="btn btn-ghost"
-                  style="padding: 2px 8px; font-size: 0.75rem"
-                  onclick="checkAllHabits(false)"
-                >
-                  إلغاء الكل
+                <button class="btn btn-ghost" onclick="resetTimer()">
+                  <i class="fa-solid fa-rotate-left"></i>
                 </button>
               </div>
             </div>
-            <div class="panel-body">
-              <!-- Search & Filter Controls -->
-              <div class="filter-bar-wrap">
-                <input
-                  type="text"
-                  id="habitSearchInput"
-                  class="search-input"
-                  placeholder="🔍 ابحث في مهام اليوم (مثلاً: فجر، كود، جيم، دايت)..."
-                  oninput="filterHabits(this.value)"
-                />
-              </div>
+          </div>
+        </div>
+      </aside>
 
-              <!-- Categories Accordion List -->
-              <div id="categoriesAccordionList">
-                <!-- Rendered Dynamically with Granular Edit/Delete on each task and category -->
-              </div>
+      <!-- COLUMN 2: Central Habits & Task Engine -->
+      <section class="workspace-col active-mobile-col" id="colHabits">
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title"><i class="fa-solid fa-clipboard-check" style="color:var(--emerald);"></i> قائمة العادات والمهام</div>
+            <div style="display:flex; align-items:center; gap:0.35rem;">
+              <button class="btn btn-ghost" style="padding:2px 7px; font-size:0.72rem;" onclick="checkAllHabits(true)">إنجاز الكل</button>
+              <button class="btn btn-ghost" style="padding:2px 7px; font-size:0.72rem;" onclick="checkAllHabits(false)">إلغاء</button>
             </div>
           </div>
-        </section>
-
-        <!-- COLUMN 3: Health, Water & Reflection (Extras) -->
-        <aside class="col-extras">
-          <!-- Water Cylinder Widget -->
-          <div class="panel">
-            <div class="panel-header">
-              <div class="panel-title">💧 تتبع شرب الماء (3 لتر)</div>
+          <div class="panel-body">
+            <!-- Search & Filter Controls -->
+            <div class="filter-bar-wrap">
+              <div class="search-input-wrap">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="habitSearchInput" class="search-input" placeholder="ابحث في مهام اليوم (فجر، كود، جيم، دايت)..." oninput="filterHabits(this.value)">
+              </div>
             </div>
-            <div class="panel-body">
-              <div class="water-tracker-card">
-                <div class="water-stat-row">
-                  <span
-                    style="
-                      font-size: 0.85rem;
-                      font-weight: 800;
-                      color: var(--cyan);
-                    "
-                    id="waterTextProgress"
-                    >0 / 3000 مل</span
-                  >
-                  <span
-                    style="font-size: 0.75rem; color: var(--text-tertiary)"
-                    id="waterCupsCount"
-                    >0 أكواب</span
-                  >
-                </div>
-                <div class="water-bar-track">
-                  <div
-                    class="water-bar-fill"
-                    id="waterBarFill"
-                    style="width: 0%"
-                  ></div>
-                </div>
-                <div class="water-actions-grid">
-                  <button class="btn-water" onclick="addWater(250)">
-                    +250 مل
-                  </button>
-                  <button class="btn-water" onclick="addWater(500)">
-                    +500 مل
-                  </button>
-                  <button class="btn-water" onclick="addWater(1000)">
-                    +1000 مل
-                  </button>
-                  <button
-                    class="btn-water"
-                    onclick="resetWater()"
-                    title="تصفير الماء"
-                  >
-                    🔄
-                  </button>
-                </div>
+
+            <!-- Categories Accordion List -->
+            <div id="categoriesAccordionList">
+              <!-- Rendered Dynamically with Granular Edit/Delete on each task and category -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- COLUMN 3: Health, Water & Reflection (Extras) -->
+      <aside class="workspace-col col-extras" id="colExtras">
+        <!-- Water Cylinder Widget -->
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title"><i class="fa-solid fa-faucet-drip" style="color:var(--cyan);"></i> شرب الماء (3 لتر)</div>
+          </div>
+          <div class="panel-body">
+            <div class="water-tracker-card">
+              <div class="water-stat-row">
+                <span style="font-size:0.85rem; font-weight:800; color:var(--cyan);" id="waterTextProgress">0 / 3000 مل</span>
+                <span style="font-size:0.75rem; color:var(--text-tertiary);" id="waterCupsCount">0 أكواب</span>
+              </div>
+              <div class="water-bar-track">
+                <div class="water-bar-fill" id="waterBarFill" style="width:0%;"></div>
+              </div>
+              <div class="water-actions-grid">
+                <button class="btn-water" onclick="addWater(250)">+250 مل</button>
+                <button class="btn-water" onclick="addWater(500)">+500 مل</button>
+                <button class="btn-water" onclick="addWater(1000)">+1L</button>
+                <button class="btn-water" onclick="resetWater()" title="تصفير"><i class="fa-solid fa-rotate-left"></i></button>
               </div>
             </div>
           </div>
+        </div>
 
-          <!-- Daily Reflection & Mood Journal -->
-          <div class="panel">
-            <div class="panel-header">
-              <div class="panel-title">📝 تقييم وملاحظات المساء</div>
+        <!-- Daily Reflection & Mood Journal -->
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title"><i class="fa-solid fa-pen-fancy" style="color:var(--amber);"></i> تقييم وملاحظات المساء</div>
+          </div>
+          <div class="panel-body">
+            <label style="font-size:0.78rem; font-weight:700; color:var(--text-secondary);">تقييم اليوم:</label>
+            <div class="mood-strip" id="moodSelector">
+              <button class="mood-btn" onclick="setMood('🔥')">🔥</button>
+              <button class="mood-btn" onclick="setMood('💪')">💪</button>
+              <button class="mood-btn" onclick="setMood('😐')">😐</button>
+              <button class="mood-btn" onclick="setMood('😴')">😴</button>
             </div>
-            <div class="panel-body">
-              <label
-                style="
-                  font-size: 0.78rem;
-                  font-weight: 700;
-                  color: var(--text-secondary);
-                "
-                >كيف تقيم إنتاجيتك اليوم؟</label
-              >
-              <div class="mood-strip" id="moodSelector">
-                <button class="mood-btn" onclick="setMood('🔥')">🔥</button>
-                <button class="mood-btn" onclick="setMood('💪')">💪</button>
-                <button class="mood-btn" onclick="setMood('😐')">😐</button>
-                <button class="mood-btn" onclick="setMood('😴')">😴</button>
-              </div>
-
-              <textarea
-                id="reflectionNotesBox"
-                class="text-box"
-                style="
-                  margin-top: 0.75rem;
-                  height: 100px;
-                  resize: vertical;
-                  font-size: 0.82rem;
-                  line-height: 1.4;
-                "
-                placeholder="اكتب مراجعتك السريعة لليوم، ما أنجزته، والتحديات..."
-                oninput="saveReflectionNote(this.value)"
-              ></textarea>
-            </div>
-          </div>
-
-          <!-- Storage & Safety Info -->
-          <div
-            class="panel"
-            style="
-              background: rgba(255, 255, 255, 0.015);
-              border-color: var(--border-subtle);
-            "
-          >
-            <div
-              class="panel-body"
-              style="
-                font-size: 0.75rem;
-                color: var(--text-tertiary);
-                line-height: 1.5;
-              "
-            >
-              🔒 <strong>تخزين محلي آمن:</strong> كل تعديل، إضافة مهمة، أو شطب
-              يتم حفظه تلقائياً في ذاكرة متصفحك. لا توجد أي بيانات تُفقد عند
-              التحديث.
-            </div>
-          </div>
-        </aside>
-      </div>
-    </main>
-
-    <!-- MODALS SYSTEM -->
-
-    <!-- Modal 1: Add/Edit Category -->
-    <div class="modal-overlay" id="categoryModal">
-      <div class="modal-sheet">
-        <div class="modal-head">
-          <h3 id="catModalTitle" style="font-size: 1rem; font-weight: 800">
-            إضافة قسم جديد
-          </h3>
-          <button class="btn-icon" onclick="closeModal('categoryModal')">
-            ✕
-          </button>
-        </div>
-        <div class="modal-content-area">
-          <input type="hidden" id="editCatId" />
-          <div class="form-field">
-            <label>اسم القسم:</label>
-            <input
-              type="text"
-              id="catNameField"
-              class="text-box"
-              placeholder="مثال: التدريب البرمجي، القراءة..."
-            />
-          </div>
-          <div class="form-field">
-            <label>أيقونة أو إيموجي القسم:</label>
-            <input
-              type="text"
-              id="catIconField"
-              class="text-box"
-              placeholder="مثال: 💻 أو 📚 أو ⚡"
-            />
+            
+            <textarea id="reflectionNotesBox" class="text-box" style="margin-top:0.7rem; height:90px; resize:vertical; font-size:0.82rem; line-height:1.4;" placeholder="اكتب مراجعتك السريعة لليوم وما تحقق..." oninput="saveReflectionNote(this.value)"></textarea>
           </div>
         </div>
-        <div class="modal-foot">
-          <button class="btn btn-ghost" onclick="closeModal('categoryModal')">
-            إلغاء
-          </button>
-          <button class="btn btn-primary" onclick="submitCategoryForm()">
-            حفظ القسم
-          </button>
+
+        <!-- Mobile-friendly storage notice -->
+        <div class="panel" style="background:rgba(255,255,255,0.015); border-color:var(--border-subtle);">
+          <div class="panel-body" style="font-size:0.74rem; color:var(--text-tertiary); line-height:1.5;">
+            <i class="fa-solid fa-shield-halved" style="color:var(--emerald);"></i> كل تعديل أو مهمة تُحفظ تلقائياً في ذاكرة المتصفح بدون أي قلق من فقدان البيانات.
+          </div>
         </div>
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- MOBILE SLIDE-UP ACTION SHEET -->
+  <div class="modal-overlay" id="actionSheetOverlay" onclick="closeActionSheet()">
+    <div class="mobile-action-sheet" id="actionSheetPanel" onclick="event.stopPropagation()">
+      <div class="sheet-handle"></div>
+      <h4 style="font-size:0.9rem; font-weight:800; margin-bottom:1rem; text-align:center;">إجراءات سريعة</h4>
+      <div class="sheet-options-grid">
+        <button class="sheet-btn primary" onclick="closeActionSheet(); openAddTaskModal();">
+          <i class="fa-solid fa-plus-circle"></i>
+          <span>مهمة جديدة</span>
+        </button>
+        <button class="sheet-btn" onclick="closeActionSheet(); openAddCategoryModal();">
+          <i class="fa-solid fa-folder-plus"></i>
+          <span>قسم جديد</span>
+        </button>
+        <button class="sheet-btn" onclick="closeActionSheet(); openAddEventModal();">
+          <i class="fa-solid fa-calendar-plus"></i>
+          <span>موعد سكشن</span>
+        </button>
+        <button class="sheet-btn emerald" onclick="closeActionSheet(); openWhatsAppDirect();">
+          <i class="fa-brands fa-whatsapp"></i>
+          <span>تقرير واتساب</span>
+        </button>
+        <button class="sheet-btn" onclick="closeActionSheet(); exportDataBackup();">
+          <i class="fa-solid fa-floppy-disk"></i>
+          <span>نسخ احتياطي</span>
+        </button>
+        <button class="sheet-btn danger" onclick="closeActionSheet(); confirmResetActiveDay();">
+          <i class="fa-solid fa-rotate-right"></i>
+          <span>تصفير اليوم</span>
+        </button>
       </div>
     </div>
+  </div>
 
-    <!-- Modal 2: Add/Edit Task -->
-    <div class="modal-overlay" id="taskModal">
-      <div class="modal-sheet">
-        <div class="modal-head">
-          <h3 id="taskModalTitle" style="font-size: 1rem; font-weight: 800">
-            إضافة مهمة جديدة
-          </h3>
-          <button class="btn-icon" onclick="closeModal('taskModal')">✕</button>
+  <!-- MODALS SYSTEM -->
+
+  <!-- Modal 1: Add/Edit Category -->
+  <div class="modal-overlay" id="categoryModal">
+    <div class="modal-sheet">
+      <div class="modal-head">
+        <h3 id="catModalTitle" style="font-size:0.95rem; font-weight:800;">إضافة قسم جديد</h3>
+        <button class="btn-icon" onclick="closeModal('categoryModal')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-content-area">
+        <input type="hidden" id="editCatId">
+        <div class="form-field">
+          <label>اسم القسم:</label>
+          <input type="text" id="catNameField" class="text-box" placeholder="مثال: التدريب البرمجي، القراءة...">
         </div>
-        <div class="modal-content-area">
-          <input type="hidden" id="editTaskId" />
-          <div class="form-field">
-            <label>اختر القسم التابع له:</label>
-            <select id="taskCategoryDropdown" class="select-box"></select>
-          </div>
-          <div class="form-field">
-            <label>اسم المهمة / العادة:</label>
-            <input
-              type="text"
-              id="taskNameField"
-              class="text-box"
-              placeholder="مثال: حل مسألة على Codeforces أو تمرين بطن"
-            />
-          </div>
-        </div>
-        <div class="modal-foot">
-          <button class="btn btn-ghost" onclick="closeModal('taskModal')">
-            إلغاء
-          </button>
-          <button class="btn btn-primary" onclick="submitTaskForm()">
-            حفظ المهمة
-          </button>
+        <div class="form-field">
+          <label>أيقونة أو إيموجي القسم:</label>
+          <input type="text" id="catIconField" class="text-box" placeholder="مثال: 💻 أو 📚 أو ⚡">
         </div>
       </div>
-    </div>
-
-    <!-- Modal 3: Add Schedule Event -->
-    <div class="modal-overlay" id="eventModal">
-      <div class="modal-sheet">
-        <div class="modal-head">
-          <h3 id="eventModalTitle" style="font-size: 1rem; font-weight: 800">
-            إضافة موعد أو سكشن لليوم
-          </h3>
-          <button class="btn-icon" onclick="closeModal('eventModal')">✕</button>
-        </div>
-        <div class="modal-content-area">
-          <input type="hidden" id="editEventIndex" />
-          <div class="form-field">
-            <label>عنوان الموعد أو السكشن:</label>
-            <input
-              type="text"
-              id="eventTitleField"
-              class="text-box"
-              placeholder="مثلاً: سكشن إمبيدد، تدريب NextGen"
-            />
-          </div>
-          <div class="form-field">
-            <label>التوقيت:</label>
-            <input
-              type="text"
-              id="eventTimeField"
-              class="text-box"
-              placeholder="مثلاً: 1:00 م - 2:00 م أو 6:00 مساءً"
-            />
-          </div>
-          <div class="form-field">
-            <label>الوسم / التصنيف:</label>
-            <input
-              type="text"
-              id="eventBadgeField"
-              class="text-box"
-              placeholder="مثلاً: كلية، كورس، أنشطة، هام"
-            />
-          </div>
-        </div>
-        <div class="modal-foot">
-          <button class="btn btn-ghost" onclick="closeModal('eventModal')">
-            إلغاء
-          </button>
-          <button class="btn btn-primary" onclick="submitEventForm()">
-            حفظ في الجدول
-          </button>
-        </div>
+      <div class="modal-foot">
+        <button class="btn btn-ghost" onclick="closeModal('categoryModal')">إلغاء</button>
+        <button class="btn btn-primary" onclick="submitCategoryForm()">حفظ القسم</button>
       </div>
     </div>
+  </div>
 
-    <!-- Modal 4: Edit Priorities -->
-    <div class="modal-overlay" id="prioritiesModal">
-      <div class="modal-sheet">
-        <div class="modal-head">
-          <h3 style="font-size: 1rem; font-weight: 800">تعديل أهم 3 أولويات</h3>
-          <button class="btn-icon" onclick="closeModal('prioritiesModal')">
-            ✕
-          </button>
+  <!-- Modal 2: Add/Edit Task -->
+  <div class="modal-overlay" id="taskModal">
+    <div class="modal-sheet">
+      <div class="modal-head">
+        <h3 id="taskModalTitle" style="font-size:0.95rem; font-weight:800;">إضافة مهمة جديدة</h3>
+        <button class="btn-icon" onclick="closeModal('taskModal')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-content-area">
+        <input type="hidden" id="editTaskId">
+        <div class="form-field">
+          <label>القسم التابع له:</label>
+          <select id="taskCategoryDropdown" class="select-box"></select>
         </div>
-        <div class="modal-content-area">
-          <div class="form-field">
-            <label>الأولوية الأولى (الأهم):</label>
-            <input type="text" id="priorityField1" class="text-box" />
-          </div>
-          <div class="form-field">
-            <label>الأولوية الثانية:</label>
-            <input type="text" id="priorityField2" class="text-box" />
-          </div>
-          <div class="form-field">
-            <label>الأولوية الثالثة:</label>
-            <input type="text" id="priorityField3" class="text-box" />
-          </div>
-        </div>
-        <div class="modal-foot">
-          <button class="btn btn-ghost" onclick="closeModal('prioritiesModal')">
-            إلغاء
-          </button>
-          <button class="btn btn-primary" onclick="submitPrioritiesForm()">
-            حفظ الأولويات
-          </button>
+        <div class="form-field">
+          <label>اسم المهمة / العادة:</label>
+          <input type="text" id="taskNameField" class="text-box" placeholder="مثال: مراجعة كود React أو تمرين بطن">
         </div>
       </div>
+      <div class="modal-foot">
+        <button class="btn btn-ghost" onclick="closeModal('taskModal')">إلغاء</button>
+        <button class="btn btn-primary" onclick="submitTaskForm()">حفظ المهمة</button>
+      </div>
     </div>
+  </div>
 
-    <!-- Application Logic & State Engine -->
-    <script>
-      // State Schema & Initial Default Data
-      const INITIAL_STATE = {
-        // Categories with individual tasks (Each task has an ID for robust CRUD)
-        categories: [
-          {
-            id: "cat_worship",
-            name: "العبادات والسنن",
-            icon: "🟢",
-            tasks: [
-              { id: "t_fajr", title: "صلاة الفجر" },
-              { id: "t_fajr_sunnah", title: "سنه الفجر" },
-              { id: "t_shorooq", title: "جلسة الشروق" },
-              { id: "t_duha", title: "اربع ركعات صلاة الضحي" },
-              { id: "t_dhuhr", title: "صلاة الضهر" },
-              { id: "t_dhuhr_sunnah", title: "سنة الضهر" },
-              { id: "t_asr_sunnah", title: "اربع ركعات بين اذان واقامة العصر" },
-              { id: "t_asr", title: "صلاة العصر" },
-              { id: "t_maghrib", title: "صلاة المغرب" },
-              { id: "t_maghrib_sunnah", title: "سنة المغرب" },
-              { id: "t_isha", title: "صلاة العشاء" },
-              { id: "t_isha_sunnah", title: "سنة العشاء" },
-              { id: "t_witr", title: "الشفع و الوتر" },
-              { id: "t_qiyam", title: "قيام الليل" },
-            ],
-          },
-          {
-            id: "cat_quran",
-            name: "القرآن والأذكار",
-            icon: "📖",
-            tasks: [
-              { id: "t_quran_juz", title: "ورد القران جزء يوميا" },
-              { id: "t_quran_memorize", title: "حفظ قراّن" },
-              { id: "t_surah_baqarah", title: "قراءة سورة البقره" },
-              { id: "t_surah_kahf", title: "قراءة سورة الكهف" },
-              { id: "t_surah_yasin", title: "قراءة سورة يس" },
-              { id: "t_surah_waqiah", title: "قراءة سورة الواقعه" },
-              { id: "t_surah_mulk", title: "قراءة سورة الملك" },
-              { id: "t_azkar_sabah", title: "اذكار الصباح" },
-              { id: "t_azkar_masaa", title: "اذكار المساء" },
-              { id: "t_azkar_nawm", title: "اذكار النوم" },
-              { id: "t_wird_zikr", title: "ورد ذكر" },
-              { id: "t_dua", title: "دعاء" },
-            ],
-          },
-          {
-            id: "cat_health",
-            name: "الصحة والعناية الشخصية",
-            icon: "🌿",
-            tasks: [
-              { id: "t_skincare_am", title: "سكن كير للوش اول ما اصحي" },
-              { id: "t_teeth_am", title: "غسيل اسناني اول ما اصحي" },
-              { id: "t_skincare_pm", title: "سكن كير للوش قبل ما انام" },
-              { id: "t_teeth_pm", title: "غسيل اسناني قبل ما انام" },
-              { id: "t_water_3l", title: "شرب 3 لتر ميه خلال اليوم" },
-              { id: "t_med_20mg", title: "اخذ برشام الحبوب 20مجم" },
-              { id: "t_med_10mg", title: "اخذ برشام الحبوب 10 مجم" },
-              { id: "t_vitamins", title: "اخذ فيتامينات" },
-            ],
-          },
-          {
-            id: "cat_dev",
-            name: "اللياقة والتطوير الشخصي",
-            icon: "⚡",
-            tasks: [
-              { id: "t_gym", title: "جم او تمارين ف البيت" },
-              { id: "t_walk_5k", title: "جري اوعمل 5 الاف خطوه " },
-              { id: "t_study", title: "مذاكرة " },
-              { id: "t_halqa", title: "حلقة التعليم" },
-              { id: "t_future_wife_dua", title: "الدعاء لمراتي المستقبليه" },
-            ],
-          },
-        ],
-        // Weekly timetable template
-        recurringSchedules: {
-          السبت: [
-            {
-              title: "سكشن سيليكتيد (Selected Topics)",
-              time: "11:00 ص - 1:00 م",
-              badge: "كلية",
-            },
-            {
-              title: "مشورة الشعبة الفجر",
-              time: "بعد صلاة الفجر",
-              badge: "أنشطة",
-            },
-          ],
-          الأحد: [
-            {
-              title: "سكشن إمبيدد (Embedded Systems)",
-              time: "1:00 م - 2:00 م",
-              badge: "كلية",
-            },
-            {
-              title: "سكشن جرافيك (Computer Graphics)",
-              time: "5:00 م - 6:00 م",
-              badge: "كلية",
-            },
-            { title: "تدريب إسلام", time: "6:00 مساءً", badge: "تدريب تقني" },
-            { title: "الجولة والمشورة", time: "بعد المغرب", badge: "أنشطة" },
-          ],
-          الاثنين: [
-            {
-              title: "تدريب NextGen للفرونت إند",
-              time: "9:00 مساءً",
-              badge: "تدريب تقني",
-            },
-            {
-              title: "مشورة المحافظة أو شعبة الطلبة",
-              time: "مساءً",
-              badge: "أنشطة",
-            },
-          ],
-          الثلاثاء: [
-            { title: "تدريب إسلام", time: "6:00 مساءً", badge: "تدريب تقني" },
-            { title: "حلقة تعليم النساء", time: "بعد العصر", badge: "أنشطة" },
-          ],
-          الأربعاء: [
-            { title: "تدريب إسلام", time: "6:00 مساءً", badge: "تدريب تقني" },
-            { title: "اللقاء مع العشاء", time: "صلاة العشاء", badge: "أنشطة" },
-          ],
-          الخميس: [
-            {
-              title: "سكشن كوميونيكيشن (Communication)",
-              time: "11:00 ص - 1:00 م",
-              badge: "كلية",
-            },
-            {
-              title: "سكشن نيتورك (Computer Networks)",
-              time: "12:00 م - 2:00 م",
-              badge: "كلية",
-            },
-            { title: "تدريب إسلام", time: "6:00 مساءً", badge: "تدريب تقني" },
-          ],
-          الجمعة: [
-            { title: "مشورة الشعبة الفجر", time: "بعد الفجر", badge: "أنشطة" },
-            {
-              title: "مراجعة ذاتية واستراحة أسبوعية",
-              time: "طوال اليوم",
-              badge: "راحة",
-            },
-          ],
+  <!-- Modal 3: Add Schedule Event -->
+  <div class="modal-overlay" id="eventModal">
+    <div class="modal-sheet">
+      <div class="modal-head">
+        <h3 id="eventModalTitle" style="font-size:0.95rem; font-weight:800;">إضافة موعد لجدول اليوم</h3>
+        <button class="btn-icon" onclick="closeModal('eventModal')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-content-area">
+        <input type="hidden" id="editEventIndex">
+        <div class="form-field">
+          <label>عنوان الموعد أو السكشن:</label>
+          <input type="text" id="eventTitleField" class="text-box" placeholder="مثلاً: سكشن إمبيدد، تدريب NextGen">
+        </div>
+        <div class="form-field">
+          <label>التوقيت:</label>
+          <input type="text" id="eventTimeField" class="text-box" placeholder="مثلاً: 1:00 م - 2:00 م أو 6:00 مساءً">
+        </div>
+        <div class="form-field">
+          <label>الوسم / التصنيف:</label>
+          <input type="text" id="eventBadgeField" class="text-box" placeholder="مثلاً: كلية، كورس، هام">
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-ghost" onclick="closeModal('eventModal')">إلغاء</button>
+        <button class="btn btn-primary" onclick="submitEventForm()">حفظ في الجدول</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4: Edit Priorities -->
+  <div class="modal-overlay" id="prioritiesModal">
+    <div class="modal-sheet">
+      <div class="modal-head">
+        <h3 style="font-size:0.95rem; font-weight:800;">تعديل أهم 3 أولويات</h3>
+        <button class="btn-icon" onclick="closeModal('prioritiesModal')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-content-area">
+        <div class="form-field">
+          <label>الأولوية الأولى (الأهم):</label>
+          <input type="text" id="priorityField1" class="text-box">
+        </div>
+        <div class="form-field">
+          <label>الأولوية الثانية:</label>
+          <input type="text" id="priorityField2" class="text-box">
+        </div>
+        <div class="form-field">
+          <label>الأولوية الثالثة:</label>
+          <input type="text" id="priorityField3" class="text-box">
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-ghost" onclick="closeModal('prioritiesModal')">إلغاء</button>
+        <button class="btn btn-primary" onclick="submitPrioritiesForm()">حفظ الأولويات</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Application Logic & Engine -->
+  <script>
+    const INITIAL_STATE = {
+      categories: [
+        {
+          id: "cat_worship",
+          name: "العبادات والسنن",
+          icon: "🟢",
+          tasks: [
+            { id: "t_fajr", title: "صلاة الفجر" },
+            { id: "t_fajr_sunnah", title: "سنه الفجر" },
+            { id: "t_shorooq", title: "جلسة الشروق" },
+            { id: "t_duha", title: "اربع ركعات صلاة الضحي" },
+            { id: "t_dhuhr", title: "صلاة الضهر" },
+            { id: "t_dhuhr_sunnah", title: "سنة الضهر" },
+            { id: "t_asr_sunnah", title: "اربع ركعات بين اذان واقامة العصر" },
+            { id: "t_asr", title: "صلاة العصر" },
+            { id: "t_maghrib", title: "صلاة المغرب" },
+            { id: "t_maghrib_sunnah", title: "سنة المغرب" },
+            { id: "t_isha", title: "صلاة العشاء" },
+            { id: "t_isha_sunnah", title: "سنة العشاء" },
+            { id: "t_witr", title: "الشفع و الوتر" },
+            { id: "t_qiyam", title: "قيام الليل" }
+          ]
         },
-        // Day-specific custom schedules or overrides: { "2026-10-19": [...] }
-        daySpecificSchedules: {},
-        // History of completions by date ISO: { "2026-10-19": { "t_fajr": true, ... } }
-        completions: {},
-        // Water log in ml: { "2026-10-19": 1500 }
-        waterLogs: {},
-        // Reflections & Mood: { "2026-10-19": { note: "...", mood: "🔥" } }
-        reflections: {},
-        // Attended schedule items: { "2026-10-19_0": true }
-        attendedEvents: {},
-        // Top 3 Priorities
-        priorities: [
-          "حضور سكشن سيليكتيد وتسليم التكليف المطلوب",
-          "تطبيق مشروع الـ React لتدريب NextGen",
-          "الالتزام بورد القرآن جزء كامل وصلاة الجماعة",
+        {
+          id: "cat_quran",
+          name: "القرآن والأذكار",
+          icon: "📖",
+          tasks: [
+            { id: "t_quran_juz", title: "ورد القران جزء يوميا" },
+            { id: "t_quran_memorize", title: "حفظ قراّن" },
+            { id: "t_surah_baqarah", title: "قراءة سورة البقره" },
+            { id: "t_surah_kahf", title: "قراءة سورة الكهف" },
+            { id: "t_surah_yasin", title: "قراءة سورة يس" },
+            { id: "t_surah_waqiah", title: "قراءة سورة الواقعه" },
+            { id: "t_surah_mulk", title: "قراءة سورة الملك" },
+            { id: "t_azkar_sabah", title: "اذكار الصباح" },
+            { id: "t_azkar_masaa", title: "اذكار المساء" },
+            { id: "t_azkar_nawm", title: "اذكار النوم" },
+            { id: "t_wird_zikr", title: "ورد ذكر" },
+            { id: "t_dua", title: "دعاء" }
+          ]
+        },
+        {
+          id: "cat_health",
+          name: "الصحة والعناية الشخصية",
+          icon: "🌿",
+          tasks: [
+            { id: "t_skincare_am", title: "سكن كير للوش اول ما اصحي" },
+            { id: "t_teeth_am", title: "غسيل اسناني اول ما اصحي" },
+            { id: "t_skincare_pm", title: "سكن كير للوش قبل ما انام" },
+            { id: "t_teeth_pm", title: "غسيل اسناني قبل ما انام" },
+            { id: "t_water_3l", title: "شرب 3 لتر ميه خلال اليوم" },
+            { id: "t_med_20mg", title: "اخذ برشام الحبوب 20مجم" },
+            { id: "t_med_10mg", title: "اخذ برشام الحبوب 10 مجم" },
+            { id: "t_vitamins", title: "اخذ فيتامينات" }
+          ]
+        },
+        {
+          id: "cat_dev",
+          name: "اللياقة والتطوير الشخصي",
+          icon: "⚡",
+          tasks: [
+            { id: "t_gym", title: "جم او تمارين ف البيت" },
+            { id: "t_walk_5k", title: "جري اوعمل 5 الاف خطوه " },
+            { id: "t_study", title: "مذاكرة " },
+            { id: "t_halqa", title: "حلقة التعليم" },
+            { id: "t_future_wife_dua", title: "الدعاء لمراتي المستقبليه" }
+          ]
+        }
+      ],
+      recurringSchedules: {
+        "السبت": [
+          { title: "سكشن سيليكتيد (Selected Topics)", time: "11:00 ص - 1:00 م", badge: "كلية" },
+          { title: "مشورة الشعبة الفجر", time: "بعد صلاة الفجر", badge: "أنشطة" }
         ],
-      };
+        "الأحد": [
+          { title: "سكشن إمبيدد (Embedded Systems)", time: "1:00 م - 2:00 م", badge: "كلية" },
+          { title: "سكشن جرافيك (Computer Graphics)", time: "5:00 م - 6:00 م", badge: "كلية" },
+          { title: "تدريب إسلام", time: "6:00 مساءً", badge: "تدريب تقني" },
+          { title: "الجولة والمشورة", time: "بعد المغرب", badge: "أنشطة" }
+        ],
+        "الاثنين": [
+          { title: "تدريب NextGen للفرونت إند", time: "9:00 مساءً", badge: "تدريب تقني" },
+          { title: "مشورة المحافظة أو شعبة الطلبة", time: "مساءً", badge: "أنشطة" }
+        ],
+        "الثلاثاء": [
+          { title: "تدريب إسلام", time: "6:00 مساءً", badge: "تدريب تقني" },
+          { title: "حلقة تعليم النساء", time: "بعد العصر", badge: "أنشطة" }
+        ],
+        "الأربعاء": [
+          { title: "تدريب إسلام", time: "6:00 مساءً", badge: "تدريب تقني" },
+          { title: "اللقاء مع العشاء", time: "صلاة العشاء", badge: "أنشطة" }
+        ],
+        "الخميس": [
+          { title: "سكشن كوميونيكيشن (Communication)", time: "11:00 ص - 1:00 م", badge: "كلية" },
+          { title: "سكشن نيتورك (Computer Networks)", time: "12:00 م - 2:00 م", badge: "كلية" },
+          { title: "تدريب إسلام", time: "6:00 مساءً", badge: "تدريب تقني" }
+        ],
+        "الجمعة": [
+          { title: "مشورة الشعبة الفجر", time: "بعد الفجر", badge: "أنشطة" },
+          { title: "مراجعة ذاتية واستراحة أسبوعية", time: "طوال اليوم", badge: "راحة" }
+        ]
+      },
+      daySpecificSchedules: {},
+      completions: {},
+      waterLogs: {},
+      reflections: {},
+      attendedEvents: {},
+      priorities: [
+        "حضور سكشن سيليكتيد وتسليم التكليف المطلوب",
+        "تطبيق مشروع الـ React لتدريب NextGen",
+        "الالتزام بورد القرآن جزء كامل وصلاة الجماعة"
+      ]
+    };
 
-      // State initialization from LocalStorage
-      const STORAGE_KEY = "kareem_command_center_v4";
-      let state =
-        JSON.parse(localStorage.getItem(STORAGE_KEY)) || INITIAL_STATE;
+    const STORAGE_KEY = "kareem_command_center_v5";
+    let state = JSON.parse(localStorage.getItem(STORAGE_KEY)) || INITIAL_STATE;
 
-      // Helper: Format date to YYYY-MM-DD
-      function toDateISO(date) {
-        const y = date.getFullYear();
-        const m = String(date.getMonth() + 1).padStart(2, "0");
-        const d = String(date.getDate()).padStart(2, "0");
-        return `${y}-${m}-${d}`;
+    function toDateISO(date) {
+      const y = date.getFullYear();
+      const m = String(date.getMonth() + 1).padStart(2, '0');
+      const d = String(date.getDate()).padStart(2, '0');
+      return `${y}-${m}-${d}`;
+    }
+
+    const ARABIC_DAYS = ["الأحد", "الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"];
+
+    let activeDate = new Date();
+    let activeDateISO = toDateISO(activeDate);
+
+    function persist() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      renderView();
+    }
+
+    // Audio Chime synthesizer via Web Audio API (Zero external latency or dependencies!)
+    function playChime(freq = 587.33, duration = 0.15) {
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContext) return;
+        const ctx = new AudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+        gain.gain.setValueAtTime(0.1, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + duration);
+      } catch (e) {
+        console.log("Audio not supported or blocked");
       }
+    }
 
-      const ARABIC_DAYS = [
-        "الأحد",
-        "الاثنين",
-        "الثلاثاء",
-        "الأربعاء",
-        "الخميس",
-        "الجمعة",
-        "السبت",
-      ];
+    // Date Navigation
+    function stepDay(offset) {
+      activeDate.setDate(activeDate.getDate() + offset);
+      activeDateISO = toDateISO(activeDate);
+      document.getElementById("calendarPicker").value = activeDateISO;
+      renderView();
+    }
 
-      // Active Selected Date
-      let activeDate = new Date();
-      let activeDateISO = toDateISO(activeDate);
+    function goToToday() {
+      activeDate = new Date();
+      activeDateISO = toDateISO(activeDate);
+      document.getElementById("calendarPicker").value = activeDateISO;
+      renderView();
+    }
 
-      // Save State
-      function persist() {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-        renderView();
-      }
+    function selectSpecificDate(isoStr) {
+      if (!isoStr) return;
+      const parts = isoStr.split('-');
+      activeDate = new Date(parts[0], parts[1] - 1, parts[2]);
+      activeDateISO = isoStr;
+      renderView();
+    }
 
-      // Date Navigation
-      function stepDay(offset) {
-        activeDate.setDate(activeDate.getDate() + offset);
-        activeDateISO = toDateISO(activeDate);
-        document.getElementById("calendarPicker").value = activeDateISO;
-        renderView();
-      }
+    function getActiveDayName() {
+      return ARABIC_DAYS[activeDate.getDay()];
+    }
 
-      function goToToday() {
-        activeDate = new Date();
-        activeDateISO = toDateISO(activeDate);
-        document.getElementById("calendarPicker").value = activeDateISO;
-        renderView();
-      }
+    // Mobile Tab Switcher
+    function switchMobileTab(tabKey) {
+      const buttons = document.querySelectorAll(".mobile-tab-btn");
+      buttons.forEach(b => b.classList.remove("active"));
+      event.currentTarget.classList.add("active");
 
-      function selectSpecificDate(isoStr) {
-        if (!isoStr) return;
-        const parts = isoStr.split("-");
-        activeDate = new Date(parts[0], parts[1] - 1, parts[2]);
-        activeDateISO = isoStr;
-        renderView();
-      }
+      const colHabits = document.getElementById("colHabits");
+      const colSchedule = document.getElementById("colSchedule");
+      const colExtras = document.getElementById("colExtras");
 
-      // Get current day name in Arabic
-      function getActiveDayName() {
-        return ARABIC_DAYS[activeDate.getDay()];
-      }
+      colHabits.classList.remove("active-mobile-col");
+      colSchedule.classList.remove("active-mobile-col");
+      colExtras.classList.remove("active-mobile-col");
 
-      // Render 7-Day Pill Strip
-      function renderWeekStrip() {
-        const container = document.getElementById("weekPillStrip");
-        container.innerHTML = "";
+      if (tabKey === 'habits') colHabits.classList.add("active-mobile-col");
+      else if (tabKey === 'schedule') colSchedule.classList.add("active-mobile-col");
+      else if (tabKey === 'extras') colExtras.classList.add("active-mobile-col");
+    }
 
-        const start = new Date(activeDate);
-        start.setDate(activeDate.getDate() - 3);
+    // Render 7-Day Pill Strip
+    function renderWeekStrip() {
+      const container = document.getElementById("weekPillStrip");
+      container.innerHTML = "";
 
-        for (let i = 0; i < 7; i++) {
-          const d = new Date(start);
-          d.setDate(start.getDate() + i);
-          const iso = toDateISO(d);
-          const dayName = ARABIC_DAYS[d.getDay()];
-          const dayNum = d.getDate();
-          const monthNum = d.getMonth() + 1;
+      const start = new Date(activeDate);
+      start.setDate(activeDate.getDate() - 3);
 
-          const pill = document.createElement("div");
-          pill.className = `day-pill ${iso === activeDateISO ? "active" : ""}`;
-          pill.innerHTML = `
+      for (let i = 0; i < 7; i++) {
+        const d = new Date(start);
+        d.setDate(start.getDate() + i);
+        const iso = toDateISO(d);
+        const dayName = ARABIC_DAYS[d.getDay()];
+        const dayNum = d.getDate();
+        const monthNum = d.getMonth() + 1;
+
+        const pill = document.createElement("div");
+        pill.className = `day-pill ${iso === activeDateISO ? 'active' : ''}`;
+        pill.innerHTML = `
           <span class="dot"></span>
           <span>${dayName}</span>
           <span style="font-size:0.75rem; opacity:0.8;">(${dayNum}/${monthNum})</span>
         `;
-          pill.onclick = () => selectSpecificDate(iso);
-          container.appendChild(pill);
-        }
+        pill.onclick = () => selectSpecificDate(iso);
+        container.appendChild(pill);
       }
+    }
 
-      // Render Dashboard
-      function renderView() {
-        renderWeekStrip();
-        document.getElementById("calendarPicker").value = activeDateISO;
+    // Render Main View
+    function renderView() {
+      renderWeekStrip();
+      document.getElementById("calendarPicker").value = activeDateISO;
 
-        const dayName = getActiveDayName();
-        const dayCompletions = state.completions[activeDateISO] || {};
+      const dayName = getActiveDayName();
+      const dayCompletions = state.completions[activeDateISO] || {};
 
-        // 1. Render Categories & Tasks
-        const accordion = document.getElementById("categoriesAccordionList");
-        accordion.innerHTML = "";
+      // 1. Render Categories & Tasks
+      const accordion = document.getElementById("categoriesAccordionList");
+      accordion.innerHTML = "";
 
-        let totalTasks = 0;
-        let completedTasks = 0;
+      let totalTasks = 0;
+      let completedTasks = 0;
 
-        state.categories.forEach((cat) => {
-          const catDone = cat.tasks.filter(
-            (t) => !!dayCompletions[t.id],
-          ).length;
-          const catTotal = cat.tasks.length;
-          totalTasks += catTotal;
-          completedTasks += catDone;
+      state.categories.forEach(cat => {
+        const catDone = cat.tasks.filter(t => !!dayCompletions[t.id]).length;
+        const catTotal = cat.tasks.length;
+        totalTasks += catTotal;
+        completedTasks += catDone;
 
-          const accordionItem = document.createElement("div");
-          accordionItem.className = "cat-accordion";
+        const accordionItem = document.createElement("div");
+        accordionItem.className = "cat-accordion";
 
-          const head = document.createElement("div");
-          head.className = "cat-header";
-          head.innerHTML = `
+        const head = document.createElement("div");
+        head.className = "cat-header";
+        head.innerHTML = `
           <div class="cat-info" onclick="toggleAccordion('cat_body_${cat.id}')">
-            <span style="font-size:1.1rem;">${cat.icon || "📌"}</span>
+            <span style="font-size:1.05rem;">${cat.icon || '📌'}</span>
             <span class="cat-title">${cat.name}</span>
             <span class="cat-badge">${catDone} / ${catTotal}</span>
           </div>
           <div class="cat-actions">
-            <button class="btn btn-ghost" style="padding:2px 8px; font-size:0.75rem;" onclick="openAddTaskForCategory('${cat.id}')">+ مهمة</button>
-            <button class="btn-icon" onclick="openEditCategoryModal('${cat.id}')" title="تعديل اسم أو أيقونة القسم">✏️</button>
-            <button class="btn-icon danger" onclick="confirmDeleteCategory('${cat.id}')" title="حذف القسم بالكامل">🗑️</button>
+            <button class="btn btn-ghost" style="padding:2px 7px; font-size:0.72rem;" onclick="openAddTaskForCategory('${cat.id}')"><i class="fa-solid fa-plus"></i> مهمة</button>
+            <button class="btn-icon" onclick="openEditCategoryModal('${cat.id}')" title="تعديل"><i class="fa-solid fa-pen"></i></button>
+            <button class="btn-icon danger" onclick="confirmDeleteCategory('${cat.id}')" title="حذف"><i class="fa-solid fa-trash"></i></button>
           </div>
         `;
 
-          const body = document.createElement("div");
-          body.className = "cat-body";
-          body.id = `cat_body_${cat.id}`;
+        const body = document.createElement("div");
+        body.className = "cat-body";
+        body.id = `cat_body_${cat.id}`;
 
-          cat.tasks.forEach((task) => {
-            const isDone = !!dayCompletions[task.id];
-            const taskEl = document.createElement("div");
-            taskEl.className = `task-card ${isDone ? "done" : ""}`;
-            taskEl.innerHTML = `
+        cat.tasks.forEach(task => {
+          const isDone = !!dayCompletions[task.id];
+          const taskEl = document.createElement("div");
+          taskEl.className = `task-card ${isDone ? 'done' : ''}`;
+          taskEl.innerHTML = `
             <div class="task-main">
-              <div class="task-check">${isDone ? "✓" : ""}</div>
+              <div class="task-check">${isDone ? '<i class="fa-solid fa-check"></i>' : ''}</div>
               <div class="task-label" title="${task.title}">${task.title}</div>
             </div>
             <div class="task-tool-strip" onclick="event.stopPropagation()">
-              <button class="btn-icon" style="font-size:0.75rem;" onclick="openEditTaskModal('${cat.id}', '${task.id}')" title="تعديل اسم المهمة">✏️</button>
-              <button class="btn-icon danger" style="font-size:0.75rem;" onclick="confirmDeleteTask('${cat.id}', '${task.id}')" title="حذف هذه المهمة">🗑️</button>
+              <button class="btn-icon" style="font-size:0.75rem;" onclick="openEditTaskModal('${cat.id}', '${task.id}')" title="تعديل"><i class="fa-solid fa-pen"></i></button>
+              <button class="btn-icon danger" style="font-size:0.75rem;" onclick="confirmDeleteTask('${cat.id}', '${task.id}')" title="حذف"><i class="fa-solid fa-trash"></i></button>
             </div>
           `;
-            taskEl.onclick = () => toggleTaskDone(task.id);
-            body.appendChild(taskEl);
-          });
-
-          accordionItem.appendChild(head);
-          accordionItem.appendChild(body);
-          accordion.appendChild(accordionItem);
+          taskEl.onclick = () => toggleTaskDone(task.id);
+          body.appendChild(taskEl);
         });
 
-        // Update KPI Matrix
-        const pct =
-          totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
-        document.getElementById("kpiPercent").textContent = `${pct}%`;
-        document.getElementById("kpiTaskRatio").textContent =
-          `${completedTasks} من ${totalTasks} مكتملة اليوم`;
+        accordionItem.appendChild(head);
+        accordionItem.appendChild(body);
+        accordion.appendChild(accordionItem);
+      });
 
-        // 2. Render Schedule Timeline
-        const scheduleContainer = document.getElementById(
-          "scheduleTimelineContainer",
-        );
-        scheduleContainer.innerHTML = "";
+      // KPI Matrix
+      const pct = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
+      document.getElementById("kpiPercent").textContent = `${pct}%`;
+      document.getElementById("kpiTaskRatio").textContent = `${completedTasks} من ${totalTasks} مكتملة اليوم`;
 
-        const activeSchedule =
-          state.daySpecificSchedules[activeDateISO] ||
-          state.recurringSchedules[dayName] ||
-          [];
-        document.getElementById("kpiEventsCount").textContent =
-          activeSchedule.length;
+      // 2. Schedule
+      const scheduleContainer = document.getElementById("scheduleTimelineContainer");
+      scheduleContainer.innerHTML = "";
 
-        let pendingEvents = 0;
-        if (activeSchedule.length === 0) {
-          scheduleContainer.innerHTML = `<p style="font-size:0.82rem; color:var(--text-tertiary); text-align:center; padding:1.2rem;">لا توجد سكاشن مسجلة لهذا اليوم 🎉</p>`;
-          document.getElementById("kpiEventsStatus").textContent =
-            "يوم هادئ بدون التزامات";
-        } else {
-          activeSchedule.forEach((ev, idx) => {
-            const eventKey = `${activeDateISO}_${idx}`;
-            const isAttended = !!state.attendedEvents[eventKey];
-            if (!isAttended) pendingEvents++;
+      const activeSchedule = state.daySpecificSchedules[activeDateISO] || state.recurringSchedules[dayName] || [];
+      document.getElementById("kpiEventsCount").textContent = activeSchedule.length;
+      
+      let pendingEvents = 0;
+      if (activeSchedule.length === 0) {
+        scheduleContainer.innerHTML = `<p style="font-size:0.8rem; color:var(--text-tertiary); text-align:center; padding:1rem;">لا توجد سكاشن مسجلة لهذا اليوم 🎉</p>`;
+        document.getElementById("kpiEventsStatus").textContent = "يوم هادئ";
+      } else {
+        activeSchedule.forEach((ev, idx) => {
+          const eventKey = `${activeDateISO}_${idx}`;
+          const isAttended = !!state.attendedEvents[eventKey];
+          if (!isAttended) pendingEvents++;
 
-            const node = document.createElement("div");
-            node.className = `timeline-node ${isAttended ? "attended" : ""}`;
-            node.innerHTML = `
+          const node = document.createElement("div");
+          node.className = `timeline-node ${isAttended ? 'attended' : ''}`;
+          node.innerHTML = `
             <div class="timeline-details" style="cursor:pointer;" onclick="toggleEventAttended('${eventKey}')">
-              <h5>${isAttended ? "✓ " : ""}${ev.title}</h5>
-              <p>⏰ ${ev.time}</p>
+              <h5>${isAttended ? '<i class="fa-solid fa-check" style="color:var(--emerald); margin-left:4px;"></i>' : ''}${ev.title}</h5>
+              <p><i class="fa-regular fa-clock"></i> ${ev.time}</p>
             </div>
-            <div style="display:flex; align-items:center; gap:0.4rem;">
-              <span class="node-badge">${ev.badge || "موعد"}</span>
-              <button class="btn-icon danger" style="font-size:0.75rem;" onclick="deleteScheduleEvent(${idx})" title="حذف هذا الموعد">✕</button>
+            <div style="display:flex; align-items:center; gap:0.3rem;">
+              <span class="node-badge">${ev.badge || 'موعد'}</span>
+              <button class="btn-icon danger" style="font-size:0.75rem;" onclick="deleteScheduleEvent(${idx})" title="حذف"><i class="fa-solid fa-xmark"></i></button>
             </div>
           `;
-            scheduleContainer.appendChild(node);
-          });
-          document.getElementById("kpiEventsStatus").textContent =
-            `${pendingEvents} متبقي للحضور`;
-        }
+          scheduleContainer.appendChild(node);
+        });
+        document.getElementById("kpiEventsStatus").textContent = `${pendingEvents} متبقي`;
+      }
 
-        // 3. Render Water
-        const waterMl = state.waterLogs[activeDateISO] || 0;
-        const waterLiters = (waterMl / 1000).toFixed(1);
-        const waterPct = Math.min(100, Math.round((waterMl / 3000) * 100));
+      // 3. Water
+      const waterMl = state.waterLogs[activeDateISO] || 0;
+      const waterLiters = (waterMl / 1000).toFixed(1);
+      const waterPct = Math.min(100, Math.round((waterMl / 3000) * 100));
 
-        document.getElementById("kpiWaterLiters").textContent = waterLiters;
-        document.getElementById("kpiWaterPct").textContent =
-          `${waterPct}% من الهدف (3L)`;
-        document.getElementById("waterTextProgress").textContent =
-          `${waterMl} / 3000 مل`;
-        document.getElementById("waterCupsCount").textContent =
-          `${Math.floor(waterMl / 250)} أكواب`;
-        document.getElementById("waterBarFill").style.width = `${waterPct}%`;
+      document.getElementById("kpiWaterLiters").textContent = waterLiters;
+      document.getElementById("kpiWaterPct").textContent = `${waterPct}% من الهدف (3L)`;
+      document.getElementById("waterTextProgress").textContent = `${waterMl} / 3000 مل`;
+      document.getElementById("waterCupsCount").textContent = `${Math.floor(waterMl / 250)} أكواب`;
+      document.getElementById("waterBarFill").style.width = `${waterPct}%`;
 
-        // 4. Render Priorities
-        const prioContainer = document.getElementById("prioritiesContainer");
-        prioContainer.innerHTML = "";
-        state.priorities.forEach((p, idx) => {
-          const item = document.createElement("div");
-          item.className = "priority-item";
-          item.innerHTML = `
-          <span><strong style="color:var(--amber); margin-left:4px;">${idx + 1}.</strong> ${p}</span>
-          <span style="font-size:0.75rem; color:var(--text-tertiary);">أولوية</span>
+      // 4. Priorities
+      const prioContainer = document.getElementById("prioritiesContainer");
+      prioContainer.innerHTML = "";
+      state.priorities.forEach((p, idx) => {
+        const item = document.createElement("div");
+        item.className = "priority-item";
+        item.innerHTML = `
+          <span><strong style="color:var(--amber); margin-left:4px;">${idx+1}.</strong> ${p}</span>
+          <span style="font-size:0.7rem; color:var(--text-tertiary);"><i class="fa-solid fa-check-double"></i></span>
         `;
-          prioContainer.appendChild(item);
-        });
+        prioContainer.appendChild(item);
+      });
 
-        // 5. Render Reflection & Mood
-        const dayRefl = state.reflections[activeDateISO] || {
-          note: "",
-          mood: "💪",
-        };
-        document.getElementById("reflectionNotesBox").value =
-          dayRefl.note || "";
-        document.getElementById("kpiMoodDisplay").textContent =
-          `${dayRefl.mood || "💪"} نشط`;
+      // 5. Reflection & Mood
+      const dayRefl = state.reflections[activeDateISO] || { note: "", mood: "💪" };
+      document.getElementById("reflectionNotesBox").value = dayRefl.note || "";
+      document.getElementById("kpiMoodDisplay").textContent = `${dayRefl.mood || '💪'} نشط`;
 
-        const moodBtns = document.getElementById("moodSelector").children;
-        for (let btn of moodBtns) {
-          if (btn.textContent.trim() === (dayRefl.mood || "💪")) {
-            btn.classList.add("selected");
-          } else {
-            btn.classList.remove("selected");
-          }
-        }
-
-        // 6. Update WhatsApp Trigger
-        updateSmartWhatsApp();
-      }
-
-      // Toggle Task Done
-      function toggleTaskDone(taskId) {
-        if (!state.completions[activeDateISO]) {
-          state.completions[activeDateISO] = {};
-        }
-        state.completions[activeDateISO][taskId] =
-          !state.completions[activeDateISO][taskId];
-        persist();
-      }
-
-      // Toggle Event Attended
-      function toggleEventAttended(eventKey) {
-        state.attendedEvents[eventKey] = !state.attendedEvents[eventKey];
-        persist();
-      }
-
-      // Reset Day Completions
-      function confirmResetActiveDay() {
-        if (
-          confirm(
-            `هل أنت متأكد من تصفير جميع مهام يوم ${getActiveDayName()} (${activeDateISO})؟`,
-          )
-        ) {
-          state.completions[activeDateISO] = {};
-          state.waterLogs[activeDateISO] = 0;
-          persist();
+      const moodBtns = document.getElementById("moodSelector").children;
+      for (let btn of moodBtns) {
+        if (btn.textContent.trim() === (dayRefl.mood || '💪')) {
+          btn.classList.add("selected");
+        } else {
+          btn.classList.remove("selected");
         }
       }
 
-      // Accordion Toggle
-      function toggleAccordion(id) {
-        const el = document.getElementById(id);
-        el.classList.toggle("collapsed");
-      }
+      // 6. WhatsApp Update
+      updateSmartWhatsApp();
+    }
 
-      // Check All / Uncheck All
-      function checkAllHabits(status) {
-        if (!state.completions[activeDateISO]) {
-          state.completions[activeDateISO] = {};
-        }
-        state.categories.forEach((cat) => {
-          cat.tasks.forEach((t) => {
-            state.completions[activeDateISO][t.id] = status;
-          });
-        });
-        persist();
+    // Toggle Task Done with Celebratory Confetti & Chime!
+    function toggleTaskDone(taskId) {
+      if (!state.completions[activeDateISO]) {
+        state.completions[activeDateISO] = {};
       }
+      const willBeDone = !state.completions[activeDateISO][taskId];
+      state.completions[activeDateISO][taskId] = willBeDone;
 
-      // Filter Tasks in real time
-      function filterHabits(keyword) {
-        keyword = keyword.trim().toLowerCase();
-        state.categories.forEach((cat) => {
-          cat.tasks.forEach((t) => {
-            // Find matching elements
-            const selector = `.task-card[title="${t.title}"]`;
-          });
-        });
-        // Simple visual toggle
-        const cards = document.querySelectorAll(".task-card");
-        cards.forEach((card) => {
-          const text = card
-            .querySelector(".task-label")
-            .textContent.toLowerCase();
-          if (!keyword || text.includes(keyword)) {
-            card.style.display = "flex";
-          } else {
-            card.style.display = "none";
-          }
+      if (willBeDone) {
+        playChime(659.25, 0.12);
+        // Micro confetti pop!
+        confetti({
+          particleCount: 22,
+          spread: 45,
+          origin: { y: 0.85 }
         });
       }
 
-      // Water Management
-      function addWater(ml) {
-        const current = state.waterLogs[activeDateISO] || 0;
-        state.waterLogs[activeDateISO] = Math.max(0, current + ml);
-        persist();
+      // Check if 100% completed
+      let total = 0, done = 0;
+      state.categories.forEach(c => {
+        c.tasks.forEach(t => {
+          total++;
+          if (state.completions[activeDateISO][t.id]) done++;
+        });
+      });
+
+      if (total > 0 && done === total) {
+        // Grand celebration confetti!
+        playChime(880, 0.35);
+        confetti({
+          particleCount: 100,
+          spread: 80,
+          origin: { y: 0.6 }
+        });
       }
 
-      function resetWater() {
+      persist();
+    }
+
+    function toggleEventAttended(eventKey) {
+      state.attendedEvents[eventKey] = !state.attendedEvents[eventKey];
+      if (state.attendedEvents[eventKey]) playChime(523.25, 0.1);
+      persist();
+    }
+
+    function confirmResetActiveDay() {
+      if (confirm(`هل أنت متأكد من تصفير مهام يوم ${getActiveDayName()} (${activeDateISO})؟`)) {
+        state.completions[activeDateISO] = {};
         state.waterLogs[activeDateISO] = 0;
         persist();
       }
+    }
 
-      // Mood & Reflection
-      function setMood(moodEmoji) {
-        if (!state.reflections[activeDateISO])
-          state.reflections[activeDateISO] = { note: "", mood: "💪" };
-        state.reflections[activeDateISO].mood = moodEmoji;
-        persist();
+    function toggleAccordion(id) {
+      const el = document.getElementById(id);
+      el.classList.toggle("collapsed");
+    }
+
+    function checkAllHabits(status) {
+      if (!state.completions[activeDateISO]) {
+        state.completions[activeDateISO] = {};
       }
-
-      function saveReflectionNote(text) {
-        if (!state.reflections[activeDateISO])
-          state.reflections[activeDateISO] = { note: "", mood: "💪" };
-        state.reflections[activeDateISO].note = text;
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      state.categories.forEach(cat => {
+        cat.tasks.forEach(t => {
+          state.completions[activeDateISO][t.id] = status;
+        });
+      });
+      if (status) {
+        playChime(783.99, 0.2);
+        confetti({ particleCount: 50, spread: 60, origin: { y: 0.7 } });
       }
+      persist();
+    }
 
-      // MODAL HELPERS
-      function openModal(id) {
-        document.getElementById(id).classList.add("active");
-      }
-      function closeModal(id) {
-        document.getElementById(id).classList.remove("active");
-      }
-
-      // Category CRUD
-      function openAddCategoryModal() {
-        document.getElementById("catModalTitle").textContent = "إضافة قسم جديد";
-        document.getElementById("editCatId").value = "";
-        document.getElementById("catNameField").value = "";
-        document.getElementById("catIconField").value = "📌";
-        openModal("categoryModal");
-      }
-
-      function openEditCategoryModal(catId) {
-        const cat = state.categories.find((c) => c.id === catId);
-        if (!cat) return;
-        document.getElementById("catModalTitle").textContent = "تعديل القسم";
-        document.getElementById("editCatId").value = cat.id;
-        document.getElementById("catNameField").value = cat.name;
-        document.getElementById("catIconField").value = cat.icon || "📌";
-        openModal("categoryModal");
-      }
-
-      function submitCategoryForm() {
-        const editId = document.getElementById("editCatId").value;
-        const name = document.getElementById("catNameField").value.trim();
-        const icon =
-          document.getElementById("catIconField").value.trim() || "📌";
-        if (!name) return alert("يرجى كتابة اسم القسم!");
-
-        if (editId) {
-          const cat = state.categories.find((c) => c.id === editId);
-          if (cat) {
-            cat.name = name;
-            cat.icon = icon;
-          }
+    function filterHabits(keyword) {
+      keyword = keyword.trim().toLowerCase();
+      const cards = document.querySelectorAll(".task-card");
+      cards.forEach(card => {
+        const text = card.querySelector(".task-label").textContent.toLowerCase();
+        if (!keyword || text.includes(keyword)) {
+          card.style.display = "flex";
         } else {
-          state.categories.push({
-            id: "cat_" + Date.now(),
-            name,
-            icon,
-            tasks: [],
-          });
+          card.style.display = "none";
         }
-        closeModal("categoryModal");
-        persist();
-      }
+      });
+    }
 
-      function confirmDeleteCategory(catId) {
-        const cat = state.categories.find((c) => c.id === catId);
-        if (!cat) return;
-        if (
-          confirm(
-            `هل تريد بالتأكيد حذف قسم "${cat.name}" بجميع مهامه (${cat.tasks.length} مهمة)؟`,
-          )
-        ) {
-          state.categories = state.categories.filter((c) => c.id !== catId);
-          persist();
-        }
-      }
+    // Water Management
+    function addWater(ml) {
+      const current = state.waterLogs[activeDateISO] || 0;
+      state.waterLogs[activeDateISO] = Math.max(0, current + ml);
+      playChime(440, 0.08);
+      persist();
+    }
 
-      // Task CRUD (Granular control)
-      function populateCategoryDropdown(selectedCatId) {
-        const select = document.getElementById("taskCategoryDropdown");
-        select.innerHTML = "";
-        state.categories.forEach((c) => {
-          const opt = document.createElement("option");
-          opt.value = c.id;
-          opt.textContent = `${c.icon || "📌"} ${c.name}`;
-          if (c.id === selectedCatId) opt.selected = true;
-          select.appendChild(opt);
+    function resetWater() {
+      state.waterLogs[activeDateISO] = 0;
+      persist();
+    }
+
+    function setMood(moodEmoji) {
+      if (!state.reflections[activeDateISO]) state.reflections[activeDateISO] = { note: "", mood: "💪" };
+      state.reflections[activeDateISO].mood = moodEmoji;
+      persist();
+    }
+
+    function saveReflectionNote(text) {
+      if (!state.reflections[activeDateISO]) state.reflections[activeDateISO] = { note: "", mood: "💪" };
+      state.reflections[activeDateISO].note = text;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    // Modal Helpers
+    function openModal(id) { document.getElementById(id).classList.add("active"); }
+    function closeModal(id) { document.getElementById(id).classList.remove("active"); }
+
+    // Mobile Action Sheet
+    function openActionSheet() {
+      document.getElementById("actionSheetOverlay").classList.add("active");
+      document.getElementById("actionSheetPanel").classList.add("active");
+    }
+
+    function closeActionSheet() {
+      document.getElementById("actionSheetOverlay").classList.remove("active");
+      document.getElementById("actionSheetPanel").classList.remove("active");
+    }
+
+    // Category CRUD
+    function openAddCategoryModal() {
+      document.getElementById("catModalTitle").textContent = "إضافة قسم جديد";
+      document.getElementById("editCatId").value = "";
+      document.getElementById("catNameField").value = "";
+      document.getElementById("catIconField").value = "📌";
+      openModal("categoryModal");
+    }
+
+    function openEditCategoryModal(catId) {
+      const cat = state.categories.find(c => c.id === catId);
+      if (!cat) return;
+      document.getElementById("catModalTitle").textContent = "تعديل القسم";
+      document.getElementById("editCatId").value = cat.id;
+      document.getElementById("catNameField").value = cat.name;
+      document.getElementById("catIconField").value = cat.icon || "📌";
+      openModal("categoryModal");
+    }
+
+    function submitCategoryForm() {
+      const editId = document.getElementById("editCatId").value;
+      const name = document.getElementById("catNameField").value.trim();
+      const icon = document.getElementById("catIconField").value.trim() || "📌";
+      if (!name) return alert("يرجى كتابة اسم القسم!");
+
+      if (editId) {
+        const cat = state.categories.find(c => c.id === editId);
+        if (cat) { cat.name = name; cat.icon = icon; }
+      } else {
+        state.categories.push({
+          id: "cat_" + Date.now(),
+          name,
+          icon,
+          tasks: []
         });
       }
+      closeModal("categoryModal");
+      persist();
+    }
 
-      function openAddTaskModal() {
-        document.getElementById("taskModalTitle").textContent =
-          "إضافة مهمة جديدة";
-        document.getElementById("editTaskId").value = "";
-        document.getElementById("taskNameField").value = "";
-        populateCategoryDropdown(state.categories[0]?.id);
-        openModal("taskModal");
+    function confirmDeleteCategory(catId) {
+      const cat = state.categories.find(c => c.id === catId);
+      if (!cat) return;
+      if (confirm(`هل تريد بالتأكيد حذف قسم "${cat.name}" بجميع مهامه (${cat.tasks.length} مهمة)؟`)) {
+        state.categories = state.categories.filter(c => c.id !== catId);
+        persist();
       }
+    }
 
-      function openAddTaskForCategory(catId) {
-        openAddTaskModal();
-        populateCategoryDropdown(catId);
-      }
+    // Task CRUD
+    function populateCategoryDropdown(selectedCatId) {
+      const select = document.getElementById("taskCategoryDropdown");
+      select.innerHTML = "";
+      state.categories.forEach(c => {
+        const opt = document.createElement("option");
+        opt.value = c.id;
+        opt.textContent = `${c.icon || '📌'} ${c.name}`;
+        if (c.id === selectedCatId) opt.selected = true;
+        select.appendChild(opt);
+      });
+    }
 
-      function openEditTaskModal(catId, taskId) {
-        const cat = state.categories.find((c) => c.id === catId);
-        const task = cat?.tasks.find((t) => t.id === taskId);
-        if (!task) return;
+    function openAddTaskModal() {
+      document.getElementById("taskModalTitle").textContent = "إضافة مهمة جديدة";
+      document.getElementById("editTaskId").value = "";
+      document.getElementById("taskNameField").value = "";
+      populateCategoryDropdown(state.categories[0]?.id);
+      openModal("taskModal");
+    }
 
-        document.getElementById("taskModalTitle").textContent = "تعديل المهمة";
-        document.getElementById("editTaskId").value = `${catId}:${taskId}`;
-        document.getElementById("taskNameField").value = task.title;
-        populateCategoryDropdown(catId);
-        openModal("taskModal");
-      }
+    function openAddTaskForCategory(catId) {
+      openAddTaskModal();
+      populateCategoryDropdown(catId);
+    }
 
-      function submitTaskForm() {
-        const editCombo = document.getElementById("editTaskId").value;
-        const targetCatId = document.getElementById(
-          "taskCategoryDropdown",
-        ).value;
-        const taskTitle = document.getElementById("taskNameField").value.trim();
-        if (!taskTitle) return alert("يرجى إدخال اسم المهمة!");
+    function openEditTaskModal(catId, taskId) {
+      const cat = state.categories.find(c => c.id === catId);
+      const task = cat?.tasks.find(t => t.id === taskId);
+      if (!task) return;
 
-        if (editCombo) {
-          const [oldCatId, taskId] = editCombo.split(":");
-          const oldCat = state.categories.find((c) => c.id === oldCatId);
-          const taskIdx = oldCat?.tasks.findIndex((t) => t.id === taskId);
+      document.getElementById("taskModalTitle").textContent = "تعديل المهمة";
+      document.getElementById("editTaskId").value = `${catId}:${taskId}`;
+      document.getElementById("taskNameField").value = task.title;
+      populateCategoryDropdown(catId);
+      openModal("taskModal");
+    }
 
-          if (oldCat && taskIdx !== -1) {
-            const taskObj = oldCat.tasks[taskIdx];
-            taskObj.title = taskTitle;
+    function submitTaskForm() {
+      const editCombo = document.getElementById("editTaskId").value;
+      const targetCatId = document.getElementById("taskCategoryDropdown").value;
+      const taskTitle = document.getElementById("taskNameField").value.trim();
+      if (!taskTitle) return alert("يرجى إدخال اسم المهمة!");
 
-            // If category changed, move it
-            if (oldCatId !== targetCatId) {
-              oldCat.tasks.splice(taskIdx, 1);
-              const newCat = state.categories.find((c) => c.id === targetCatId);
-              newCat?.tasks.push(taskObj);
-            }
+      if (editCombo) {
+        const [oldCatId, taskId] = editCombo.split(':');
+        const oldCat = state.categories.find(c => c.id === oldCatId);
+        const taskIdx = oldCat?.tasks.findIndex(t => t.id === taskId);
+
+        if (oldCat && taskIdx !== -1) {
+          const taskObj = oldCat.tasks[taskIdx];
+          taskObj.title = taskTitle;
+          if (oldCatId !== targetCatId) {
+            oldCat.tasks.splice(taskIdx, 1);
+            const newCat = state.categories.find(c => c.id === targetCatId);
+            newCat?.tasks.push(taskObj);
           }
-        } else {
-          const targetCat = state.categories.find((c) => c.id === targetCatId);
-          if (targetCat) {
-            targetCat.tasks.push({
-              id: "t_" + Date.now(),
-              title: taskTitle,
-            });
-          }
         }
-        closeModal("taskModal");
-        persist();
-      }
-
-      function confirmDeleteTask(catId, taskId) {
-        const cat = state.categories.find((c) => c.id === catId);
-        const task = cat?.tasks.find((t) => t.id === taskId);
-        if (!task) return;
-
-        if (confirm(`هل تريد حذف مهمة "${task.title}"؟`)) {
-          cat.tasks = cat.tasks.filter((t) => t.id !== taskId);
-          // Clear from all historical completion logs
-          Object.keys(state.completions).forEach((d) => {
-            if (state.completions[d]) delete state.completions[d][taskId];
+      } else {
+        const targetCat = state.categories.find(c => c.id === targetCatId);
+        if (targetCat) {
+          targetCat.tasks.push({
+            id: "t_" + Date.now(),
+            title: taskTitle
           });
-          persist();
         }
       }
+      closeModal("taskModal");
+      persist();
+    }
 
-      // Schedule Events CRUD
-      function openAddEventModal() {
-        document.getElementById("eventModalTitle").textContent =
-          "إضافة موعد لجدول اليوم";
-        document.getElementById("editEventIndex").value = "";
-        document.getElementById("eventTitleField").value = "";
-        document.getElementById("eventTimeField").value = "";
-        document.getElementById("eventBadgeField").value = "كلية";
-        openModal("eventModal");
-      }
+    function confirmDeleteTask(catId, taskId) {
+      const cat = state.categories.find(c => c.id === catId);
+      const task = cat?.tasks.find(t => t.id === taskId);
+      if (!task) return;
 
-      function submitEventForm() {
-        const title = document.getElementById("eventTitleField").value.trim();
-        const time = document.getElementById("eventTimeField").value.trim();
-        const badge =
-          document.getElementById("eventBadgeField").value.trim() || "موعد";
-        if (!title) return alert("يرجى كتابة عنوان الموعد!");
-
-        const dayName = getActiveDayName();
-        // Ensure day specific schedule exists or clone from recurring
-        if (!state.daySpecificSchedules[activeDateISO]) {
-          state.daySpecificSchedules[activeDateISO] = [
-            ...(state.recurringSchedules[dayName] || []),
-          ];
-        }
-        state.daySpecificSchedules[activeDateISO].push({ title, time, badge });
-        closeModal("eventModal");
-        persist();
-      }
-
-      function deleteScheduleEvent(idx) {
-        const dayName = getActiveDayName();
-        if (!state.daySpecificSchedules[activeDateISO]) {
-          state.daySpecificSchedules[activeDateISO] = [
-            ...(state.recurringSchedules[dayName] || []),
-          ];
-        }
-        state.daySpecificSchedules[activeDateISO].splice(idx, 1);
-        persist();
-      }
-
-      // Priorities Form
-      function openEditPrioritiesModal() {
-        document.getElementById("priorityField1").value =
-          state.priorities[0] || "";
-        document.getElementById("priorityField2").value =
-          state.priorities[1] || "";
-        document.getElementById("priorityField3").value =
-          state.priorities[2] || "";
-        openModal("prioritiesModal");
-      }
-
-      function submitPrioritiesForm() {
-        state.priorities = [
-          document.getElementById("priorityField1").value.trim(),
-          document.getElementById("priorityField2").value.trim(),
-          document.getElementById("priorityField3").value.trim(),
-        ].filter((x) => x.length > 0);
-        closeModal("prioritiesModal");
-        persist();
-      }
-
-      // WhatsApp Summary Generator
-      function updateSmartWhatsApp() {
-        const dayName = getActiveDayName();
-        const daySchedule =
-          state.daySpecificSchedules[activeDateISO] ||
-          state.recurringSchedules[dayName] ||
-          [];
-        const dayCompletions = state.completions[activeDateISO] || {};
-
-        let total = 0,
-          done = 0;
-        const uncompletedTasks = [];
-        state.categories.forEach((cat) => {
-          cat.tasks.forEach((t) => {
-            total++;
-            if (dayCompletions[t.id]) done++;
-            else uncompletedTasks.push(t.title);
-          });
+      if (confirm(`هل تريد حذف مهمة "${task.title}"؟`)) {
+        cat.tasks = cat.tasks.filter(t => t.id !== taskId);
+        Object.keys(state.completions).forEach(d => {
+          if (state.completions[d]) delete state.completions[d][taskId];
         });
-
-        const schedText = daySchedule
-          .map((s) => `• ${s.title} (${s.time})`)
-          .join("%0A");
-        const uncompletedSample = uncompletedTasks
-          .slice(0, 4)
-          .map((t) => `- ${t}`)
-          .join("%0A");
-
-        const message = `السلام عليكم يا كريم 🚀%0Aتقرير عمليات يوم ${dayName} (${activeDateISO}):%0A%0A🎓 السكاشن والمواعيد:%0A${schedText || "لا توجد سكاشن اليوم"}%0A%0A📊 نسبة إنجاز العادات: ${total > 0 ? Math.round((done / total) * 100) : 0}% (${done}/${total})%0A%0A⚠️ من المهام المتبقية:%0A${uncompletedSample}%0A%0Aبالتوفيق يا بطل!`;
-
-        document.getElementById("smartWhatsAppBtn").href =
-          `https://wa.me/201095622134?text=${message}`;
+        persist();
       }
+    }
 
-      // Backup & Restore
-      function exportDataBackup() {
-        const dataStr =
-          "data:text/json;charset=utf-8," +
-          encodeURIComponent(JSON.stringify(state, null, 2));
-        const downloadAnchor = document.createElement("a");
-        downloadAnchor.setAttribute("href", dataStr);
-        downloadAnchor.setAttribute(
-          "download",
-          `kareem_dashboard_backup_${activeDateISO}.json`,
-        );
-        document.body.appendChild(downloadAnchor);
-        downloadAnchor.click();
-        downloadAnchor.remove();
+    // Schedule Events CRUD
+    function openAddEventModal() {
+      document.getElementById("eventModalTitle").textContent = "إضافة موعد لجدول اليوم";
+      document.getElementById("editEventIndex").value = "";
+      document.getElementById("eventTitleField").value = "";
+      document.getElementById("eventTimeField").value = "";
+      document.getElementById("eventBadgeField").value = "كلية";
+      openModal("eventModal");
+    }
+
+    function submitEventForm() {
+      const title = document.getElementById("eventTitleField").value.trim();
+      const time = document.getElementById("eventTimeField").value.trim();
+      const badge = document.getElementById("eventBadgeField").value.trim() || "موعد";
+      if (!title) return alert("يرجى كتابة عنوان الموعد!");
+
+      const dayName = getActiveDayName();
+      if (!state.daySpecificSchedules[activeDateISO]) {
+        state.daySpecificSchedules[activeDateISO] = [...(state.recurringSchedules[dayName] || [])];
       }
+      state.daySpecificSchedules[activeDateISO].push({ title, time, badge });
+      closeModal("eventModal");
+      persist();
+    }
 
-      // Pomodoro Timer Engine
-      let timerSeconds = 25 * 60;
-      let timerInterval = null;
-      let isTimerRunning = false;
-
-      function formatTimer(s) {
-        const mins = Math.floor(s / 60);
-        const secs = s % 60;
-        return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+    function deleteScheduleEvent(idx) {
+      const dayName = getActiveDayName();
+      if (!state.daySpecificSchedules[activeDateISO]) {
+        state.daySpecificSchedules[activeDateISO] = [...(state.recurringSchedules[dayName] || [])];
       }
+      state.daySpecificSchedules[activeDateISO].splice(idx, 1);
+      persist();
+    }
 
-      function toggleTimer() {
-        const btn = document.getElementById("timerStartBtn");
-        if (isTimerRunning) {
-          clearInterval(timerInterval);
-          isTimerRunning = false;
-          btn.textContent = "استئناف";
-          btn.classList.remove("btn-danger");
-          btn.classList.add("btn-primary");
-        } else {
-          isTimerRunning = true;
-          btn.textContent = "إيقاف مؤقت";
-          btn.classList.remove("btn-primary");
-          btn.classList.add("btn-danger");
-          timerInterval = setInterval(() => {
-            if (timerSeconds > 0) {
-              timerSeconds--;
-              document.getElementById("timerDisplay").textContent =
-                formatTimer(timerSeconds);
-            } else {
-              clearInterval(timerInterval);
-              isTimerRunning = false;
-              alert("⏰ انتهت جلسة التركيز! خذ استراحة لمدة 5 دقائق.");
-              resetTimer();
-            }
-          }, 1000);
-        }
-      }
+    // Priorities
+    function openEditPrioritiesModal() {
+      document.getElementById("priorityField1").value = state.priorities[0] || "";
+      document.getElementById("priorityField2").value = state.priorities[1] || "";
+      document.getElementById("priorityField3").value = state.priorities[2] || "";
+      openModal("prioritiesModal");
+    }
 
-      function resetTimer() {
+    function submitPrioritiesForm() {
+      state.priorities = [
+        document.getElementById("priorityField1").value.trim(),
+        document.getElementById("priorityField2").value.trim(),
+        document.getElementById("priorityField3").value.trim()
+      ].filter(x => x.length > 0);
+      closeModal("prioritiesModal");
+      persist();
+    }
+
+    // WhatsApp Message
+    function updateSmartWhatsApp() {
+      const dayName = getActiveDayName();
+      const daySchedule = state.daySpecificSchedules[activeDateISO] || state.recurringSchedules[dayName] || [];
+      const dayCompletions = state.completions[activeDateISO] || {};
+
+      let total = 0, done = 0;
+      const uncompletedTasks = [];
+      state.categories.forEach(cat => {
+        cat.tasks.forEach(t => {
+          total++;
+          if (dayCompletions[t.id]) done++;
+          else uncompletedTasks.push(t.title);
+        });
+      });
+
+      const schedText = daySchedule.map(s => `• ${s.title} (${s.time})`).join("%0A");
+      const uncompletedSample = uncompletedTasks.slice(0, 4).map(t => `- ${t}`).join("%0A");
+
+      const message = `السلام عليكم يا كريم 🚀%0Aتقرير عمليات يوم ${dayName} (${activeDateISO}):%0A%0A🎓 السكاشن والمواعيد:%0A${schedText || 'لا توجد سكاشن اليوم'}%0A%0A📊 نسبة إنجاز العادات: ${total > 0 ? Math.round((done/total)*100) : 0}% (${done}/${total})%0A%0A⚠️ من المهام المتبقية:%0A${uncompletedSample}%0A%0Aبالتوفيق يا بطل!`;
+      const waUrl = `https://wa.me/201095622134?text=${message}`;
+      
+      document.getElementById("smartWhatsAppBtn").href = waUrl;
+      document.getElementById("mobileWaBtn").href = waUrl;
+    }
+
+    function openWhatsAppDirect() {
+      updateSmartWhatsApp();
+      window.open(document.getElementById("smartWhatsAppBtn").href, "_blank");
+    }
+
+    function exportDataBackup() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state, null, 2));
+      const downloadAnchor = document.createElement("a");
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", `kareem_dashboard_backup_${activeDateISO}.json`);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+    }
+
+    // Pomodoro Timer
+    let timerSeconds = 25 * 60;
+    let timerInterval = null;
+    let isTimerRunning = false;
+
+    function formatTimer(s) {
+      const mins = Math.floor(s / 60);
+      const secs = s % 60;
+      return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    }
+
+    function toggleTimer() {
+      const btn = document.getElementById("timerStartBtn");
+      if (isTimerRunning) {
         clearInterval(timerInterval);
         isTimerRunning = false;
-        timerSeconds = 25 * 60;
-        document.getElementById("timerDisplay").textContent = "25:00";
-        const btn = document.getElementById("timerStartBtn");
-        btn.textContent = "بدء الجلسة";
+        btn.innerHTML = '<i class="fa-solid fa-play"></i> استئناف';
         btn.classList.remove("btn-danger");
         btn.classList.add("btn-primary");
+      } else {
+        isTimerRunning = true;
+        btn.innerHTML = '<i class="fa-solid fa-pause"></i> إيقاف';
+        btn.classList.remove("btn-primary");
+        btn.classList.add("btn-danger");
+        timerInterval = setInterval(() => {
+          if (timerSeconds > 0) {
+            timerSeconds--;
+            document.getElementById("timerDisplay").textContent = formatTimer(timerSeconds);
+          } else {
+            clearInterval(timerInterval);
+            isTimerRunning = false;
+            playChime(880, 0.5);
+            confetti({ particleCount: 70, spread: 70, origin: { y: 0.5 } });
+            alert("⏰ انتهت جلسة التركيز! خذ استراحة لمدة 5 دقائق.");
+            resetTimer();
+          }
+        }, 1000);
       }
+    }
 
-      // Initialize View
-      window.addEventListener("DOMContentLoaded", () => {
-        goToToday();
-      });
-    </script>
-  </body>
+    function resetTimer() {
+      clearInterval(timerInterval);
+      isTimerRunning = false;
+      timerSeconds = 25 * 60;
+      document.getElementById("timerDisplay").textContent = "25:00";
+      const btn = document.getElementById("timerStartBtn");
+      btn.innerHTML = '<i class="fa-solid fa-play"></i> بدء الجلسة';
+      btn.classList.remove("btn-danger");
+      btn.classList.add("btn-primary");
+    }
+
+    // Init on DOM ready
+    window.addEventListener("DOMContentLoaded", () => {
+      goToToday();
+    });
+  </script>
+</body>
 </html>
